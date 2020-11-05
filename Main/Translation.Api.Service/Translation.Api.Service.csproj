@@ -2,14 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Harudka.Translation.Api.Data</RootNamespace>
+    <RootNamespace>Harudka.Translation.Api.Service</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Translation.Api.Data\Translation.Api.Data.csproj" />
     <ProjectReference Include="..\Translation.Api.Domain\Translation.Api.Domain.csproj" />
   </ItemGroup>
 
