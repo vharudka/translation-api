@@ -4,7 +4,9 @@
 
 using System;
 using System.Threading.Tasks;
+using Harudka.Translation.Api.Models.Requests;
 using Harudka.Translation.Api.Service;
+using Harudka.Translation.Api.Validators;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +21,40 @@ namespace Harudka.Translation.Api.Controllers
         public LanguagesController(ILanguageService languageService)
         {
             _languageService = languageService;
+        }
+
+        // PUT
+        // api/languages/1
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAsync(short id, [FromBody] UpdateLanguageRequest request)
+        {
+            var validator = new UpdateLanguageRequestValidator();
+            var validationResult = validator.Validate(request);
+
+            if(!validationResult.IsValid)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
+            }
+
+            try
+            {
+                var language = await _languageService.GetOneAsync(id);
+                if(language == null)
+                {
+                    return NotFound();
+                }
+
+                var response = await _languageService.UpdateAsync(request, language);
+
+                return new ObjectResult(response)
+                {
+                    StatusCode = StatusCodes.Status200OK
+                };
+            }
+            catch(Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error has occured while processing the request");
+            }
         }
 
         // GET

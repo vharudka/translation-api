@@ -3,6 +3,7 @@
 
 
 using Harudka.Translation.Api.Domain;
+using Harudka.Translation.Api.Models.Requests;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace Harudka.Translation.Api.Service
 {
     public interface ILanguageService
     {
+        Task<Language> UpdateAsync(UpdateLanguageRequest request, Language language);
+        Task<Language> GetOneAsync(short id);
         Task<IReadOnlyList<Language>> GetAsync();
     }
 }

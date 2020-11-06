@@ -26,7 +26,8 @@ namespace Harudka.Translation.Api
         {
             services.AddDbContext<ApplicationContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
+                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
+                       .EnableSensitiveDataLogging();
             });
 
             services.AddScoped<ILanguageService, LanguageService>();

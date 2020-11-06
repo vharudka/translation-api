@@ -2,11 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Harudka.Translation.Api.Dto</RootNamespace>
+    <RootNamespace>Harudka.Translation.Api.Models</RootNamespace>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Requests\" />
-  </ItemGroup>
 
 </Project>
