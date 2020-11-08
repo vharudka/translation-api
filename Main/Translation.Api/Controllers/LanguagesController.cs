@@ -23,12 +23,40 @@ namespace Harudka.Translation.Api.Controllers
             _languageService = languageService;
         }
 
+        // POST
+        // api/languages
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync([FromBody] CreateOrUpdateLanguageRequest createLanguageRequest)
+        {
+            var validator = new CreateOrUpdateLanguageRequestValidator();
+            var validationResult = validator.Validate(createLanguageRequest);
+
+            if(!validationResult.IsValid)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
+            }
+
+            try
+            {
+                var response = await _languageService.CreateAsync(createLanguageRequest);
+
+                return new ObjectResult(response)
+                {
+                    StatusCode = StatusCodes.Status201Created
+                };
+            }
+            catch(Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error has occured while processing the request");
+            }
+        }
+
         // PUT
         // api/languages/1
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(short id, [FromBody] UpdateLanguageRequest request)
+        public async Task<IActionResult> UpdateAsync(short id, [FromBody] CreateOrUpdateLanguageRequest request)
         {
-            var validator = new UpdateLanguageRequestValidator();
+            var validator = new CreateOrUpdateLanguageRequestValidator();
             var validationResult = validator.Validate(request);
 
             if(!validationResult.IsValid)

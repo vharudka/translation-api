@@ -20,7 +20,19 @@ namespace Harudka.Translation.Api.Service
             _applicationContext = applicationContext;
         }
 
-        public async Task<Language> UpdateAsync(UpdateLanguageRequest request, Language language)
+        public async Task<Language> CreateAsync(CreateOrUpdateLanguageRequest request)
+        {
+            var language = new Language();
+            language.Code = request.Code;
+            language.Name = request.Name;
+
+            _applicationContext.Languages.Add(language);
+            await _applicationContext.SaveChangesAsync();
+
+            return language;
+        }
+
+        public async Task<Language> UpdateAsync(CreateOrUpdateLanguageRequest request, Language language)
         {
             language.Code = request.Code;
             language.Name = request.Name;

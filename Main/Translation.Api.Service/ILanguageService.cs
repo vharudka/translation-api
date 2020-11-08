@@ -11,7 +11,8 @@ namespace Harudka.Translation.Api.Service
 {
     public interface ILanguageService
     {
-        Task<Language> UpdateAsync(UpdateLanguageRequest request, Language language);
+        Task<Language> CreateAsync(CreateOrUpdateLanguageRequest request);
+        Task<Language> UpdateAsync(CreateOrUpdateLanguageRequest request, Language language);
         Task<Language> GetOneAsync(short id);
         Task<IReadOnlyList<Language>> GetAsync();
     }

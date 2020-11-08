@@ -4,7 +4,7 @@
 
 namespace Harudka.Translation.Api.Models.Requests
 {
-    public class UpdateLanguageRequest
+    public class CreateOrUpdateLanguageRequest
     {
         public string Code { get; set; }
         public string Name { get; set; }

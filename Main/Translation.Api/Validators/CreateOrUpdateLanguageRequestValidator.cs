@@ -7,9 +7,9 @@ using Harudka.Translation.Api.Models.Requests;
 
 namespace Harudka.Translation.Api.Validators
 {
-    public class UpdateLanguageRequestValidator : AbstractValidator<UpdateLanguageRequest>
+    public class CreateOrUpdateLanguageRequestValidator : AbstractValidator<CreateOrUpdateLanguageRequest>
     {
-        public UpdateLanguageRequestValidator()
+        public CreateOrUpdateLanguageRequestValidator()
         {
             RuleFor(x => x.Code).NotNull()
                                 .Length(2, 2);
