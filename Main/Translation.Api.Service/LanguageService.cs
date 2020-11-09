@@ -52,5 +52,13 @@ namespace Harudka.Translation.Api.Service
         {
             return await _applicationContext.Languages.ToListAsync();
         }
+
+        public async Task<Language> DeleteAsync(Language language)
+        {
+            _applicationContext.Languages.Remove(language);
+            await _applicationContext.SaveChangesAsync();
+
+            return language;
+        }
     }
 }

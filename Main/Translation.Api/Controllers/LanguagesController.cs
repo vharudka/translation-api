@@ -104,5 +104,31 @@ namespace Harudka.Translation.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error has occured while processing the request");
             }
         }
+
+        // DELETE
+        // api/languages
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(short id)
+        {
+            try
+            {
+                var language = await _languageService.GetOneAsync(id);
+                if(language == null)
+                {
+                    return NotFound();
+                }
+
+                var response = await _languageService.DeleteAsync(language);
+
+                return new ObjectResult(response)
+                {
+                    StatusCode = StatusCodes.Status200OK
+                };
+            }
+            catch(Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error has occured while processing the request");
+            }
+        }
     }
 }

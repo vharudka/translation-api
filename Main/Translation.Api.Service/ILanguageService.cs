@@ -15,5 +15,6 @@ namespace Harudka.Translation.Api.Service
         Task<Language> UpdateAsync(CreateOrUpdateLanguageRequest request, Language language);
         Task<Language> GetOneAsync(short id);
         Task<IReadOnlyList<Language>> GetAsync();
+        Task<Language> DeleteAsync(Language language);
     }
 }
