@@ -36,19 +36,12 @@ namespace Harudka.Translation.Api.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest);
             }
 
-            try
-            {
-                var response = await _languageService.CreateAsync(createLanguageRequest);
+            var response = await _languageService.CreateAsync(createLanguageRequest);
 
-                return new ObjectResult(response)
-                {
-                    StatusCode = StatusCodes.Status201Created
-                };
-            }
-            catch(Exception)
+            return new ObjectResult(response)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error has occured while processing the request");
-            }
+                StatusCode = StatusCodes.Status201Created
+            };
         }
 
         // PUT
@@ -64,25 +57,19 @@ namespace Harudka.Translation.Api.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest);
             }
 
-            try
-            {
-                var language = await _languageService.GetOneAsync(id);
-                if(language == null)
-                {
-                    return NotFound();
-                }
+            var language = await _languageService.GetOneAsync(id);
 
-                var response = await _languageService.UpdateAsync(request, language);
-
-                return new ObjectResult(response)
-                {
-                    StatusCode = StatusCodes.Status200OK
-                };
-            }
-            catch(Exception)
+            if(language == null)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error has occured while processing the request");
+                return NotFound();
             }
+
+            var response = await _languageService.UpdateAsync(request, language);
+
+            return new ObjectResult(response)
+            {
+                StatusCode = StatusCodes.Status200OK
+            };
         }
 
         // GET
@@ -90,19 +77,12 @@ namespace Harudka.Translation.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
-            try
-            {
-                var response = await _languageService.GetAsync();
+            var response = await _languageService.GetAsync();
 
-                return new ObjectResult(response)
-                {
-                    StatusCode = StatusCodes.Status200OK
-                };
-            }
-            catch(Exception)
+            return new ObjectResult(response)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error has occured while processing the request");
-            }
+                StatusCode = StatusCodes.Status200OK
+            };
         }
 
         // DELETE
@@ -110,25 +90,19 @@ namespace Harudka.Translation.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(short id)
         {
-            try
-            {
-                var language = await _languageService.GetOneAsync(id);
-                if(language == null)
-                {
-                    return NotFound();
-                }
+            var language = await _languageService.GetOneAsync(id);
 
-                var response = await _languageService.DeleteAsync(language);
-
-                return new ObjectResult(response)
-                {
-                    StatusCode = StatusCodes.Status200OK
-                };
-            }
-            catch(Exception)
+            if(language == null)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error has occured while processing the request");
+                return NotFound();
             }
+
+            var response = await _languageService.DeleteAsync(language);
+
+            return new ObjectResult(response)
+            {
+                StatusCode = StatusCodes.Status200OK
+            };
         }
     }
 }
