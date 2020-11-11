@@ -5,8 +5,4 @@
     <RootNamespace>Harudka.Translation.Api.Dto</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Requests\" />
-  </ItemGroup>
-
 </Project>

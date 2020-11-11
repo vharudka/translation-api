@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Data", "Tra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Service", "Translation.Api.Service\Translation.Api.Service.csproj", "{59330750-BD5D-4ED4-8CF5-9E3F3E1BA103}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translation.Api.Models", "Translation.Api.Models\Translation.Api.Models.csproj", "{9329BB4A-C265-4E29-833D-4FFC171A4D73}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translation.Api.Dto", "Translation.Api.Dto\Translation.Api.Dto.csproj", "{46C7933A-8762-44AB-AC87-A84A589BA747}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{59330750-BD5D-4ED4-8CF5-9E3F3E1BA103}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59330750-BD5D-4ED4-8CF5-9E3F3E1BA103}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59330750-BD5D-4ED4-8CF5-9E3F3E1BA103}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9329BB4A-C265-4E29-833D-4FFC171A4D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9329BB4A-C265-4E29-833D-4FFC171A4D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9329BB4A-C265-4E29-833D-4FFC171A4D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9329BB4A-C265-4E29-833D-4FFC171A4D73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46C7933A-8762-44AB-AC87-A84A589BA747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46C7933A-8762-44AB-AC87-A84A589BA747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46C7933A-8762-44AB-AC87-A84A589BA747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46C7933A-8762-44AB-AC87-A84A589BA747}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

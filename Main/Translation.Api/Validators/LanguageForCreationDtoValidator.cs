@@ -3,13 +3,13 @@
 
 
 using FluentValidation;
-using Harudka.Translation.Api.Models.Requests;
+using Harudka.Translation.Api.Dto;
 
 namespace Harudka.Translation.Api.Validators
 {
-    public class CreateOrUpdateLanguageRequestValidator : AbstractValidator<CreateOrUpdateLanguageRequest>
+    public class LanguageForCreationDtoValidator : AbstractValidator<LanguageForCreationDto>
     {
-        public CreateOrUpdateLanguageRequestValidator()
+        public LanguageForCreationDtoValidator()
         {
             RuleFor(x => x.Code).NotNull()
                                 .Length(2, 2);

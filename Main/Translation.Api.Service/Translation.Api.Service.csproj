@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Translation.Api.Data\Translation.Api.Data.csproj" />
     <ProjectReference Include="..\Translation.Api.Domain\Translation.Api.Domain.csproj" />
-    <ProjectReference Include="..\Translation.Api.Models\Translation.Api.Models.csproj" />
   </ItemGroup>
 
 </Project>

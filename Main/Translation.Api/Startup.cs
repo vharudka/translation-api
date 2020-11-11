@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License in the project root for license information.
 
 
+using AutoMapper;
 using Harudka.Translation.Api.Data;
 using Harudka.Translation.Api.Service;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Harudka.Translation.Api
 {
@@ -30,6 +32,8 @@ namespace Harudka.Translation.Api
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
                        .EnableSensitiveDataLogging();
             });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<ILanguageService, LanguageService>();
 
