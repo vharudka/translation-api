@@ -3,11 +3,15 @@
 
 
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using Harudka.Translation.Api.Data;
 using Harudka.Translation.Api.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,7 +41,37 @@ namespace Harudka.Translation.Api
 
             services.AddScoped<ILanguageService, LanguageService>();
 
-            services.AddControllers();
+            services.AddControllers()
+                    .AddFluentValidation(options =>
+                    {
+                        options.RegisterValidatorsFromAssemblyContaining<Startup>();
+                    })
+                    .ConfigureApiBehaviorOptions(setupAction =>
+                    {
+                        setupAction.InvalidModelStateResponseFactory = context =>
+                        {
+                            var problemDetailsFactory = context.HttpContext.RequestServices.GetRequiredService<ProblemDetailsFactory>();
+                            var problemDetails = problemDetailsFactory.CreateValidationProblemDetails(context.HttpContext, context.ModelState);
+
+                            problemDetails.Detail = "See the errors field for details.";
+                            problemDetails.Instance = context.HttpContext.Request.Path;
+
+                            var actionExecutingContext = context as ActionExecutingContext;
+
+                            if((context.ModelState.ErrorCount > 0) &&
+                               (actionExecutingContext?.ActionArguments.Count == context.ActionDescriptor.Parameters.Count))
+                            {
+                                problemDetails.Type = "https://tools.ietf.org/html/rfc4918#section-11.2";
+                                problemDetails.Status = StatusCodes.Status422UnprocessableEntity;
+                                problemDetails.Title = "One or more validation errors occurred.";
+                            }
+
+                            return new UnprocessableEntityObjectResult(problemDetails)
+                            {
+                                ContentTypes = { "application/problem+json" }
+                            };
+                        };
+                    });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

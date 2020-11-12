@@ -12,6 +12,7 @@ namespace Harudka.Translation.Api.Validators
         public LanguageForCreationDtoValidator()
         {
             RuleFor(x => x.Code).NotNull()
+                                .NotEmpty()
                                 .Length(2, 2);
 
             RuleFor(x => x.Name).NotNull()

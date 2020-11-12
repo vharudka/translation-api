@@ -9,13 +9,12 @@ using Harudka.Translation.Api.Domain;
 using Harudka.Translation.Api.Dto;
 using Harudka.Translation.Api.Service;
 using Harudka.Translation.Api.Validators;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Harudka.Translation.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class LanguagesController : ControllerBase
     {
         private readonly ILanguageService _languageService;
@@ -32,14 +31,6 @@ namespace Harudka.Translation.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<LanguageDto>> CreateAsync([FromBody] LanguageForCreationDto languageForCreationDto)
         {
-            var validator = new LanguageForCreationDtoValidator();
-            var validationResult = validator.Validate(languageForCreationDto);
-
-            if(!validationResult.IsValid)
-            {
-                return BadRequest();
-            }
-
             var languageForCreation = _mapper.Map<Language>(languageForCreationDto);
 
             var language = await _languageService.CreateAsync(languageForCreation);
@@ -54,14 +45,6 @@ namespace Harudka.Translation.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(short id, [FromBody] LanguageForUpdatingDto languageForUpdatingDto)
         {
-            var validator = new LanguageForUpdatingDtoValidator();
-            var validationResult = validator.Validate(languageForUpdatingDto);
-
-            if(!validationResult.IsValid)
-            {
-                return BadRequest();
-            }
-
             var language = await _languageService.GetAsync(id);
 
             if(language == null)

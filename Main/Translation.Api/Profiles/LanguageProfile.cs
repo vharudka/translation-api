@@ -13,9 +13,6 @@ namespace Harudka.Translation.Api.Profiles
         public LanguageProfile()
         {
             CreateMap<Language, LanguageDto>();
-            //CreateMap<Language, LanguageForCreationDto>();
-            //CreateMap<Language, LanguageForUpdatingDto>();
-
             CreateMap<LanguageForCreationDto, Language>();
             CreateMap<LanguageForUpdatingDto, Language>();
         }
