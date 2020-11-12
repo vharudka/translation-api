@@ -5,6 +5,7 @@
 using Harudka.Translation.Api.Data.Configurations;
 using Harudka.Translation.Api.Domain;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Harudka.Translation.Api.Data
 {
@@ -22,7 +23,7 @@ namespace Harudka.Translation.Api.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new LanguageConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
