@@ -26,6 +26,16 @@ namespace Harudka.Translation.Api.Controllers
             _mapper = mapper;
         }
 
+        // OPTIONS
+        // api/languages
+        [HttpOptions]
+        public IActionResult GetOptions()
+        {
+            Response.Headers.Add("Allow", "OPTIONS, POST, PUT, GET, DELETE");
+
+            return Ok();
+        }
+
         // POST
         // api/languages
         [HttpPost]
