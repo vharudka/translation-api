@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using System;
 
 namespace Harudka.Translation.Api
@@ -87,7 +88,18 @@ namespace Harudka.Translation.Api
                     appBuilder.Run(async context =>
                     {
                         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                        await context.Response.WriteAsync("An error has occured while processing the request");
+
+                        var problemDetailsFactory = context.RequestServices.GetRequiredService<ProblemDetailsFactory>();
+                        var problemDetails = problemDetailsFactory.CreateProblemDetails(context);
+
+                        context.Response.Headers.Add("Content-Type", "application/problem+json");
+
+                        problemDetails.Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1";
+                        problemDetails.Status = StatusCodes.Status500InternalServerError;
+                        problemDetails.Title = "An error has occured while processing the request.";
+                        problemDetails.Instance = context.Request.Path;
+
+                        await context.Response.WriteAsync(JsonConvert.SerializeObject(problemDetails));
                     });
                 });
             }
