@@ -95,8 +95,9 @@ namespace Harudka.Translation.Api
                         context.Response.Headers.Add("Content-Type", "application/problem+json");
 
                         problemDetails.Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1";
+                        problemDetails.Title = "Internal Server Error";
                         problemDetails.Status = StatusCodes.Status500InternalServerError;
-                        problemDetails.Title = "An error has occured while processing the request.";
+                        problemDetails.Detail = "An error has occured while processing the request.";
                         problemDetails.Instance = context.Request.Path;
 
                         await context.Response.WriteAsync(JsonConvert.SerializeObject(problemDetails));

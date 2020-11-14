@@ -4,9 +4,7 @@
 
 namespace Harudka.Translation.Api.Dto
 {
-    public class LanguageForCreationDto
+    public class LanguageForCreationDto : LanguageBaseDto
     {
-        public string Code { get; set; }
-        public string Name { get; set; }
     }
 }

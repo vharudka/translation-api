@@ -2,14 +2,13 @@
 // Licensed under the Apache License, Version 2.0. See License in the project root for license information.
 
 
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using AutoMapper;
 using Harudka.Translation.Api.Domain;
 using Harudka.Translation.Api.Dto;
 using Harudka.Translation.Api.Service;
-using Harudka.Translation.Api.Validators;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Harudka.Translation.Api.Controllers
 {
@@ -72,6 +71,7 @@ namespace Harudka.Translation.Api.Controllers
         // GET
         // api/languages/1
         [HttpGet("{id}", Name = nameof(GetAsync))]
+        [HttpHead("{id}")]
         public async Task<ActionResult<LanguageDto>> GetAsync(short id)
         {
             var language = await _languageService.GetAsync(id);
@@ -87,6 +87,7 @@ namespace Harudka.Translation.Api.Controllers
         // GET
         // api/languages
         [HttpGet]
+        [HttpHead]
         public async Task<ActionResult<IReadOnlyList<LanguageDto>>> GetAllAsync()
         {
             var languages = await _languageService.GetAllAsync();
