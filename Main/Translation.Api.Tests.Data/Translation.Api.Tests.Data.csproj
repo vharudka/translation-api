@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Translation.Api.Domain\Translation.Api.Domain.csproj" />
     <ProjectReference Include="..\Translation.Api.Dto\Translation.Api.Dto.csproj" />
   </ItemGroup>
 

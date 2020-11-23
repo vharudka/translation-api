@@ -28,7 +28,7 @@ namespace Harudka.Translation.Api.Controllers
         // OPTIONS
         // api/languages
         [HttpOptions]
-        public IActionResult GetOptions()
+        public ActionResult GetOptions()
         {
             Response.Headers.Add("Allow", "OPTIONS, POST, PUT, GET, DELETE");
 
@@ -52,7 +52,7 @@ namespace Harudka.Translation.Api.Controllers
         // PUT
         // api/languages/1
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(short id, [FromBody] LanguageForUpdatingDto languageForUpdatingDto)
+        public async Task<ActionResult> UpdateAsync(short id, [FromBody] LanguageForUpdatingDto languageForUpdatingDto)
         {
             var language = await _languageService.GetAsync(id);
 
@@ -98,7 +98,7 @@ namespace Harudka.Translation.Api.Controllers
         // DELETE
         // api/languages/1
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(short id)
+        public async Task<ActionResult> DeleteAsync(short id)
         {
             var language = await _languageService.GetAsync(id);
 
