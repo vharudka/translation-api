@@ -5,6 +5,7 @@
 using FluentValidation.TestHelper;
 using Harudka.Translation.Api.Dto;
 using Harudka.Translation.Api.Tests.Data;
+using Harudka.Translation.Api.Tests.Data.Resources;
 using Harudka.Translation.Api.Validators;
 using Xunit;
 

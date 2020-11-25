@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Harudka.Translation.Api.Tests.Data {
+namespace Harudka.Translation.Api.Tests.Data.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Harudka.Translation.Api.Tests.Data {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Harudka.Translation.Api.Tests.Data.ErrorMessages", typeof(ErrorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Harudka.Translation.Api.Tests.Data.Resources.ErrorMessages", typeof(ErrorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

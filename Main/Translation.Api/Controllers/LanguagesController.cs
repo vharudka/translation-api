@@ -5,7 +5,7 @@
 using AutoMapper;
 using Harudka.Translation.Api.Domain;
 using Harudka.Translation.Api.Dto;
-using Harudka.Translation.Api.Service;
+using Harudka.Translation.Api.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -17,12 +17,12 @@ namespace Harudka.Translation.Api.Controllers
     [Route("api/[controller]")]
     public class LanguagesController : ControllerBase
     {
-        private readonly ILanguageService _languageService;
+        private readonly ILanguageRepository _languageRepository;
         private readonly IMapper _mapper;
 
-        public LanguagesController(ILanguageService languageService, IMapper mapper)
+        public LanguagesController(ILanguageRepository languageRepository, IMapper mapper)
         {
-            _languageService = languageService;
+            _languageRepository = languageRepository;
             _mapper = mapper;
         }
 
@@ -32,8 +32,8 @@ namespace Harudka.Translation.Api.Controllers
         /// <summary>
         /// Retrieves allow header
         /// </summary>
-        /// <returns>An empty response with allow header</returns>
-        /// <response code="200">Returns the stock items list</response>
+        /// <returns>An empty response with allow header for language</returns>
+        /// <response code="200">Returns allow header for language</response>
 
         [HttpOptions]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -53,22 +53,22 @@ namespace Harudka.Translation.Api.Controllers
         /// <param name="languageForCreationDto">Request model</param>
         /// <returns>A response with a created language</returns>
         /// <response code="201">If a language was successfully created</response>
-        /// <response code="400">If there was a validation error</response>
+        /// <response code="422">If there was a validation error</response>
         /// <response code="500">If there was an internal server error</response>
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<LanguageDto>> CreateAsync([FromBody] LanguageForCreationDto languageForCreationDto)
         {
             var languageForCreation = _mapper.Map<Language>(languageForCreationDto);
 
-            var language = await _languageService.CreateAsync(languageForCreation);
+            var language = await _languageRepository.CreateAsync(languageForCreation);
 
             var languageDto = _mapper.Map<LanguageDto>(language);
 
-            return CreatedAtRoute(nameof(GetAsync), new { id = languageDto.Id }, languageDto);
+            return CreatedAtRoute("GetLanguage", new { id = languageDto.Id }, languageDto);
         }
 
         // PUT
@@ -82,18 +82,18 @@ namespace Harudka.Translation.Api.Controllers
         /// <param name="languageForUpdatingDto">Request model</param>
         /// <returns>A response with no content</returns>
         /// <response code="204">If a language was successfully updated</response>
-        /// <response code="400">If there was a validation error</response>
+        /// <response code="422">If there was a validation error</response>
         /// <response code="404">If a language is not exists</response>
         /// <response code="500">If there was an internal server error</response>
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> UpdateAsync(short id, [FromBody] LanguageForUpdatingDto languageForUpdatingDto)
         {
-            var language = await _languageService.GetAsync(id);
+            var language = await _languageRepository.GetAsync(id);
 
             if(language == null)
             {
@@ -102,7 +102,7 @@ namespace Harudka.Translation.Api.Controllers
 
             _mapper.Map(languageForUpdatingDto, language);
 
-            await _languageService.UpdateAsync(language);
+            await _languageRepository.UpdateAsync(language);
 
             return NoContent();
         }
@@ -119,14 +119,14 @@ namespace Harudka.Translation.Api.Controllers
         /// <response code="404">If a language is not exists</response>
         /// <response code="500">If there was an internal server error</response>
 
-        [HttpGet("{id}", Name = nameof(GetAsync))]
+        [HttpGet("{id}", Name = "GetLanguage")]
         [HttpHead("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<LanguageDto>> GetAsync(short id)
         {
-            var language = await _languageService.GetAsync(id);
+            var language = await _languageRepository.GetAsync(id);
 
             if(language == null)
             {
@@ -152,7 +152,7 @@ namespace Harudka.Translation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IReadOnlyList<LanguageDto>>> GetAllAsync()
         {
-            var languages = await _languageService.GetAllAsync();
+            var languages = await _languageRepository.GetAllAsync();
 
             return Ok(_mapper.Map<IReadOnlyList<LanguageDto>>(languages));
         }
@@ -165,24 +165,24 @@ namespace Harudka.Translation.Api.Controllers
         /// </summary>
         /// <param name="id">language id</param>
         /// <returns>A response with no content</returns>
-        /// <response code="200">If a language was successfully deleted</response>
+        /// <response code="204">If a language was successfully deleted</response>
         /// <response code="404">If a language is not exists</response>
         /// <response code="500">If there was an internal server error</response>
 
         [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteAsync(short id)
         {
-            var language = await _languageService.GetAsync(id);
+            var language = await _languageRepository.GetAsync(id);
 
             if(language == null)
             {
                 return NotFound();
             }
 
-            await _languageService.DeleteAsync(language);
+            await _languageRepository.DeleteAsync(language);
 
             return NoContent();
         }

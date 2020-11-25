@@ -11,6 +11,7 @@ namespace Harudka.Translation.Api.Data
     public class ApplicationContext : DbContext
     {
         public DbSet<Language> Languages { get; set; }
+        public DbSet<Application> Applications { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)

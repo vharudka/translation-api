@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Translation.Api.Dto\Translation.Api.Dto.csproj" />
-    <ProjectReference Include="..\Translation.Api.Service\Translation.Api.Service.csproj" />
+    <ProjectReference Include="..\Translation.Api.Service\Translation.Api.Repository.csproj" />
   </ItemGroup>
 
 </Project>

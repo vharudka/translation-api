@@ -4,12 +4,69 @@
         <name>Translation.Api</name>
     </assembly>
     <members>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetOptions">
+            <summary>
+            Retrieves allow header
+            </summary>
+            <returns>An empty response with allow header for application</returns>
+            <response code="200">Returns allow header for application</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.CreateAsync(Harudka.Translation.Api.Dto.ApplicationForCreationDto)">
+            <summary>
+            Creates a new application
+            </summary>
+            <param name="applicationForCreationDto">Request model</param>
+            <returns>A response with a created application</returns>
+            <response code="201">If an application was successfully created</response>
+            <response code="422">If there was a validation error</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.UpdateAsync(System.Guid,Harudka.Translation.Api.Dto.ApplicationForUpdatingDto)">
+            <summary>
+            Updates an existing application
+            </summary>
+            <param name="id">application id</param>
+            <param name="applicationForUpdatingDto">Request model</param>
+            <returns>A response with no content</returns>
+            <response code="204">If an application was successfully updated</response>
+            <response code="422">If there was a validation error</response>
+            <response code="404">If an application is not exists</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetAsync(System.Guid)">
+            <summary>
+            Retrieves an application by id
+            </summary>
+            <param name="id">application id</param>
+            <returns>A response with an application</returns>
+            <response code="200">If an application was successfully found</response>
+            <response code="404">If an application is not exists</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetAllAsync">
+            <summary>
+            Retrieves applications
+            </summary>
+            <returns>A response with a list of applications</returns>
+            <response code="200">If an applications were successfully returned</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.DeleteAsync(System.Guid)">
+            <summary>
+            Deletes an application by id
+            </summary>
+            <param name="id">application id</param>
+            <returns>A response with no content</returns>
+            <response code="204">If an application was successfully deleted</response>
+            <response code="404">If an application is not exists</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
         <member name="M:Harudka.Translation.Api.Controllers.LanguagesController.GetOptions">
             <summary>
             Retrieves allow header
             </summary>
-            <returns>An empty response with allow header</returns>
-            <response code="200">Returns the stock items list</response>
+            <returns>An empty response with allow header for language</returns>
+            <response code="200">Returns allow header for language</response>
         </member>
         <member name="M:Harudka.Translation.Api.Controllers.LanguagesController.CreateAsync(Harudka.Translation.Api.Dto.LanguageForCreationDto)">
             <summary>
@@ -18,7 +75,7 @@
             <param name="languageForCreationDto">Request model</param>
             <returns>A response with a created language</returns>
             <response code="201">If a language was successfully created</response>
-            <response code="400">If there was a validation error</response>
+            <response code="422">If there was a validation error</response>
             <response code="500">If there was an internal server error</response>
         </member>
         <member name="M:Harudka.Translation.Api.Controllers.LanguagesController.UpdateAsync(System.Int16,Harudka.Translation.Api.Dto.LanguageForUpdatingDto)">
@@ -29,7 +86,7 @@
             <param name="languageForUpdatingDto">Request model</param>
             <returns>A response with no content</returns>
             <response code="204">If a language was successfully updated</response>
-            <response code="400">If there was a validation error</response>
+            <response code="422">If there was a validation error</response>
             <response code="404">If a language is not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
@@ -57,7 +114,7 @@
             </summary>
             <param name="id">language id</param>
             <returns>A response with no content</returns>
-            <response code="200">If a language was successfully deleted</response>
+            <response code="204">If a language was successfully deleted</response>
             <response code="404">If a language is not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>

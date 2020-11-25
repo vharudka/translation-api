@@ -5,7 +5,7 @@
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using Harudka.Translation.Api.Data;
-using Harudka.Translation.Api.Service;
+using Harudka.Translation.Api.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -43,7 +43,8 @@ namespace Harudka.Translation.Api
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<ILanguageRepository, LanguageRepository>();
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
 
             services.AddControllers()
                     .AddFluentValidation(options =>
@@ -81,11 +82,9 @@ namespace Harudka.Translation.Api
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Translation API", Version = "v1" });
 
-                // Get xml comments path
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
-                // Set xml path
                 options.IncludeXmlComments(xmlPath);
             });
         }

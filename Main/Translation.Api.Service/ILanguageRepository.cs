@@ -6,9 +6,9 @@ using Harudka.Translation.Api.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Harudka.Translation.Api.Service
+namespace Harudka.Translation.Api.Repository
 {
-    public interface ILanguageService
+    public interface ILanguageRepository
     {
         Task<Language> CreateAsync(Language language);
         Task UpdateAsync(Language language);

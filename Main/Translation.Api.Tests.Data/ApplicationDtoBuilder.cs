@@ -3,24 +3,24 @@
 
 
 using Harudka.Translation.Api.Dto;
+using System;
 
 namespace Harudka.Translation.Api.Tests.Data
 {
-    public class LanguageDtoBuilder : LanguageBaseDtoBuilder<LanguageDto>
+    public class ApplicationDtoBuilder : ApplicationBaseDtoBuilder<ApplicationDto>
     {
-        private short _id;
+        private Guid _id;
 
-        public override LanguageDto Build()
+        public override ApplicationDto Build()
         {
-            return new LanguageDto
+            return new ApplicationDto
             {
                 Id = _id,
-                Code = code,
                 Name = name
             };
         }
 
-        public LanguageDtoBuilder WithId(short id)
+        public ApplicationDtoBuilder WithId(Guid id)
         {
             _id = id;
             return this;

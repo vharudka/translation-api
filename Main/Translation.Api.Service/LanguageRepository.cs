@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Harudka.Translation.Api.Service
+namespace Harudka.Translation.Api.Repository
 {
-    public class LanguageService : ILanguageService
+    public class LanguageRepository : ILanguageRepository
     {
         private readonly ApplicationContext _applicationContext;
 
-        public LanguageService(ApplicationContext applicationContext)
+        public LanguageRepository(ApplicationContext applicationContext)
         {
             _applicationContext = applicationContext;
         }

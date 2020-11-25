@@ -2,7 +2,7 @@
 using Harudka.Translation.Api.Controllers;
 using Harudka.Translation.Api.Domain;
 using Harudka.Translation.Api.Dto;
-using Harudka.Translation.Api.Service;
+using Harudka.Translation.Api.Repository;
 using Harudka.Translation.Api.Tests.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +15,7 @@ namespace Harudka.Translation.Api.Tests.Controllers
 {
     public class LanguagesControllerTests
     {
-        private readonly Mock<ILanguageService> _languageServiceMock;
+        private readonly Mock<ILanguageRepository> _languageRepositoryMock;
         private readonly LanguageBuilder _languageBuilder;
         private readonly LanguageForCreationDtoBuilder _languageForCreationDtoBuilder;
         private readonly LanguageForUpdatingDtoBuilder _languageForUpdatingDtoBuilder;
@@ -23,7 +23,7 @@ namespace Harudka.Translation.Api.Tests.Controllers
 
         public LanguagesControllerTests()
         {
-            _languageServiceMock = new Mock<ILanguageService>();
+            _languageRepositoryMock = new Mock<ILanguageRepository>();
             _languageBuilder = new LanguageBuilder();
             _languageForCreationDtoBuilder = new LanguageForCreationDtoBuilder();
             _languageForUpdatingDtoBuilder = new LanguageForUpdatingDtoBuilder();
@@ -37,7 +37,7 @@ namespace Harudka.Translation.Api.Tests.Controllers
             var mapper = config.CreateMapper();
 
             var httpContext = new DefaultHttpContext();
-            _controller = new LanguagesController(_languageServiceMock.Object, mapper)
+            _controller = new LanguagesController(_languageRepositoryMock.Object, mapper)
             {
                 ControllerContext = new ControllerContext()
                 {
@@ -67,8 +67,8 @@ namespace Harudka.Translation.Api.Tests.Controllers
                                            .WithName("English")
                                            .Build();
 
-            _languageServiceMock.Setup(x => x.CreateAsync(It.IsAny<Language>()))
-                                .ReturnsAsync(language);
+            _languageRepositoryMock.Setup(x => x.CreateAsync(It.IsAny<Language>()))
+                                   .ReturnsAsync(language);
 
             var result = await _controller.CreateAsync(languageForCreationDto);
 
@@ -86,8 +86,8 @@ namespace Harudka.Translation.Api.Tests.Controllers
                                            .WithName("English")
                                            .Build();
 
-            _languageServiceMock.Setup(x => x.CreateAsync(It.IsAny<Language>()))
-                                .ReturnsAsync(language);
+            _languageRepositoryMock.Setup(x => x.CreateAsync(It.IsAny<Language>()))
+                                   .ReturnsAsync(language);
 
             var result = await _controller.CreateAsync(languageForCreationDto);
 
@@ -107,8 +107,8 @@ namespace Harudka.Translation.Api.Tests.Controllers
                                                                     .WithName("English")
                                                                     .Build();
 
-            _languageServiceMock.Setup(x => x.GetAsync(It.IsAny<short>()))
-                                .ReturnsAsync(language);
+            _languageRepositoryMock.Setup(x => x.GetAsync(It.IsAny<short>()))
+                                   .ReturnsAsync(language);
 
             var result = await _controller.UpdateAsync(0, languageForUpdating);
 
@@ -118,22 +118,22 @@ namespace Harudka.Translation.Api.Tests.Controllers
         [Fact]
         public async Task UpdateAsync_ReturnsNoContentResult()
         {
-            var languageForCreationDto = _languageForUpdatingDtoBuilder.WithCode("en")
-                                                                       .WithName("English")
-                                                                       .Build();
+            var languageForUpdating = _languageForUpdatingDtoBuilder.WithCode("en")
+                                                                    .WithName("English")
+                                                                    .Build();
             var language = _languageBuilder.WithId(1)
                                            .WithCode("en")
                                            .WithName("English")
                                            .Build();
 
-            _languageServiceMock.Setup(x => x.GetAsync(It.IsAny<short>()))
-                                .ReturnsAsync(language);
-            _languageServiceMock.Setup(x => x.UpdateAsync(It.IsAny<Language>()))
-                                .Verifiable();
+            _languageRepositoryMock.Setup(x => x.GetAsync(It.IsAny<short>()))
+                                   .ReturnsAsync(language);
+            _languageRepositoryMock.Setup(x => x.UpdateAsync(It.IsAny<Language>()))
+                                   .Verifiable();
 
-            var result = await _controller.UpdateAsync(1, languageForCreationDto);
+            var result = await _controller.UpdateAsync(1, languageForUpdating);
 
-            _languageServiceMock.Verify();
+            _languageRepositoryMock.Verify();
             Assert.IsType<NoContentResult>(result);
         }
 
@@ -142,8 +142,8 @@ namespace Harudka.Translation.Api.Tests.Controllers
         {
             Language language = null;
 
-            _languageServiceMock.Setup(x => x.GetAsync(It.IsAny<short>()))
-                                .ReturnsAsync(language);
+            _languageRepositoryMock.Setup(x => x.GetAsync(It.IsAny<short>()))
+                                   .ReturnsAsync(language);
 
             var result = await _controller.GetAsync(0);
 
@@ -158,8 +158,8 @@ namespace Harudka.Translation.Api.Tests.Controllers
                                            .WithName("English")
                                            .Build();
 
-            _languageServiceMock.Setup(x => x.GetAsync(It.IsAny<short>()))
-                                .ReturnsAsync(language);
+            _languageRepositoryMock.Setup(x => x.GetAsync(It.IsAny<short>()))
+                                   .ReturnsAsync(language);
 
             var result = await _controller.GetAsync(1);
 
@@ -174,8 +174,8 @@ namespace Harudka.Translation.Api.Tests.Controllers
                                            .WithName("English")
                                            .Build();
 
-            _languageServiceMock.Setup(x => x.GetAsync(It.IsAny<short>()))
-                                .ReturnsAsync(language);
+            _languageRepositoryMock.Setup(x => x.GetAsync(It.IsAny<short>()))
+                                   .ReturnsAsync(language);
 
             var result = await _controller.GetAsync(1);
 
@@ -192,8 +192,8 @@ namespace Harudka.Translation.Api.Tests.Controllers
         {
             var languages = new List<Language>();
 
-            _languageServiceMock.Setup(x => x.GetAllAsync())
-                                .ReturnsAsync(languages);
+            _languageRepositoryMock.Setup(x => x.GetAllAsync())
+                                   .ReturnsAsync(languages);
 
             var result = await _controller.GetAllAsync();
 
@@ -215,8 +215,8 @@ namespace Harudka.Translation.Api.Tests.Controllers
                                 .Build(),
             };
 
-            _languageServiceMock.Setup(x => x.GetAllAsync())
-                                .ReturnsAsync(languages);
+            _languageRepositoryMock.Setup(x => x.GetAllAsync())
+                                   .ReturnsAsync(languages);
 
             var result = await _controller.GetAllAsync();
 
@@ -231,8 +231,8 @@ namespace Harudka.Translation.Api.Tests.Controllers
         {
             Language language = null;
 
-            _languageServiceMock.Setup(x => x.GetAsync(It.IsAny<short>()))
-                                .ReturnsAsync(language);
+            _languageRepositoryMock.Setup(x => x.GetAsync(It.IsAny<short>()))
+                                   .ReturnsAsync(language);
 
             var result = await _controller.DeleteAsync(0);
 
@@ -247,14 +247,14 @@ namespace Harudka.Translation.Api.Tests.Controllers
                                            .WithName("English")
                                            .Build();
 
-            _languageServiceMock.Setup(x => x.GetAsync(It.IsAny<short>()))
-                                .ReturnsAsync(language);
-            _languageServiceMock.Setup(x => x.DeleteAsync(It.IsAny<Language>()))
-                                .Verifiable();
+            _languageRepositoryMock.Setup(x => x.GetAsync(It.IsAny<short>()))
+                                   .ReturnsAsync(language);
+            _languageRepositoryMock.Setup(x => x.DeleteAsync(It.IsAny<Language>()))
+                                   .Verifiable();
 
             var result = await _controller.DeleteAsync(1);
 
-            _languageServiceMock.Verify();
+            _languageRepositoryMock.Verify();
             Assert.IsType<NoContentResult>(result);
         }
     }

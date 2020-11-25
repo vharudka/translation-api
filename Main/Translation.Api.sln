@@ -9,15 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Domain", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Data", "Translation.Api.Data\Translation.Api.Data.csproj", "{071BF869-9D41-462F-9EB6-30BCBC563601}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Service", "Translation.Api.Service\Translation.Api.Service.csproj", "{59330750-BD5D-4ED4-8CF5-9E3F3E1BA103}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Repository", "Translation.Api.Service\Translation.Api.Repository.csproj", "{59330750-BD5D-4ED4-8CF5-9E3F3E1BA103}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Dto", "Translation.Api.Dto\Translation.Api.Dto.csproj", "{46C7933A-8762-44AB-AC87-A84A589BA747}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0EA442A9-78A9-4771-8240-32A1D67EB16A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translation.Api.Tests", "Translation.Api.Tests\Translation.Api.Tests.csproj", "{8D910D65-72E9-4CB3-9510-DCA7B28AB14C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Tests", "Translation.Api.Tests\Translation.Api.Tests.csproj", "{8D910D65-72E9-4CB3-9510-DCA7B28AB14C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translation.Api.Tests.Data", "Translation.Api.Tests.Data\Translation.Api.Tests.Data.csproj", "{8535B97E-CBD8-4E72-B5BF-744EE2927780}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Tests.Data", "Translation.Api.Tests.Data\Translation.Api.Tests.Data.csproj", "{8535B97E-CBD8-4E72-B5BF-744EE2927780}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
