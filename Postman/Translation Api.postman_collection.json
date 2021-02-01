@@ -894,7 +894,7 @@
 					"response": []
 				},
 				{
-					"name": "Update - 200 - No Content",
+					"name": "Update - 204 - No Content",
 					"event": [
 						{
 							"listen": "test",
