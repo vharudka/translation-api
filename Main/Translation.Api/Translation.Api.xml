@@ -11,7 +11,7 @@
             <returns>An empty response with allow header for application</returns>
             <response code="200">Returns allow header for application</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.CreateAsync(Harudka.Translation.Api.Dto.ApplicationForCreationDto)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.CreateApplicationAsync(Harudka.Translation.Api.Dto.ApplicationForCreationDto)">
             <summary>
             Creates a new application
             </summary>
@@ -21,11 +21,11 @@
             <response code="422">If there was a validation error</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.UpdateAsync(System.Guid,Harudka.Translation.Api.Dto.ApplicationForUpdatingDto)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.UpdateApplicationAsync(System.Guid,Harudka.Translation.Api.Dto.ApplicationForUpdatingDto)">
             <summary>
             Updates an existing application
             </summary>
-            <param name="id">application id</param>
+            <param name="applicationId">application id</param>
             <param name="applicationForUpdatingDto">Request model</param>
             <returns>A response with no content</returns>
             <response code="204">If an application was successfully updated</response>
@@ -33,17 +33,17 @@
             <response code="404">If an application is not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetAsync(System.Guid)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetApplicationAsync(System.Guid)">
             <summary>
             Retrieves an application by id
             </summary>
-            <param name="id">application id</param>
+            <param name="applicationId">application id</param>
             <returns>A response with an application</returns>
             <response code="200">If an application was successfully found</response>
             <response code="404">If an application is not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetAllAsync">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetAllApplicationsAsync">
             <summary>
             Retrieves applications
             </summary>
@@ -51,11 +51,53 @@
             <response code="200">If an applications were successfully returned</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.DeleteAsync(System.Guid)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.DeleteApplicationAsync(System.Guid)">
             <summary>
             Deletes an application by id
             </summary>
-            <param name="id">application id</param>
+            <param name="applicationId">application id</param>
+            <returns>A response with no content</returns>
+            <response code="204">If an application was successfully deleted</response>
+            <response code="404">If an application is not exists</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.CreateApplicationLanguageAsync(System.String,Harudka.Translation.Api.Dto.ApplicationLanguageForCreationDto)">
+            <summary>
+            Creates a new application language
+            </summary>
+            <param name="applicationId">application id</param>
+            <param name="applicationLanguageForCreationDto">Request model</param>
+            <returns>A response with a created application language</returns>
+            <response code="201">If an application language was successfully created</response>
+            <response code="422">If there was a validation error</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetApplicationLanguageAsync(System.Guid,System.Int16)">
+            <summary>
+            Retrieves an application language by ids
+            </summary>
+            <param name="applicationId">application id</param>
+            <param name="languageId">application id</param>
+            <returns>A response with an application</returns>
+            <response code="200">If an application was successfully found</response>
+            <response code="404">If an application is not exists</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetAllApplicationLanguagesAsync(System.Guid)">
+            <summary>
+            Retrieves applications
+            </summary>
+            <param name="applicationId">application id</param>
+            <returns>A response with a list of applications</returns>
+            <response code="200">If an applications were successfully returned</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.DeleteApplicationLanguageAsync(System.Guid,System.Int16)">
+            <summary>
+            Deletes an application by id
+            </summary>
+            <param name="applicationId">application id</param>
+            <param name="languageId">application id</param>
             <returns>A response with no content</returns>
             <response code="204">If an application was successfully deleted</response>
             <response code="404">If an application is not exists</response>

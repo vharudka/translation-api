@@ -5,6 +5,7 @@
 using AutoMapper;
 using Harudka.Translation.Api.Domain;
 using Harudka.Translation.Api.Dto;
+using Harudka.Translation.Api.Helpers;
 using Harudka.Translation.Api.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +20,15 @@ namespace Harudka.Translation.Api.Controllers
     public class ApplicationsController : ControllerBase
     {
         private readonly IApplicationRepository _applicationRepository;
+        private readonly IApplicationLanguageRepository _applicationLanguageRepository;
         private readonly IMapper _mapper;
 
-        public ApplicationsController(IApplicationRepository applicationRepository, IMapper mapper)
+        public ApplicationsController(IApplicationRepository applicationRepository,
+                                      IApplicationLanguageRepository applicationLanguageRepository,
+                                      IMapper mapper)
         {
             _applicationRepository = applicationRepository;
+            _applicationLanguageRepository = applicationLanguageRepository;
             _mapper = mapper;
         }
 
@@ -61,7 +66,7 @@ namespace Harudka.Translation.Api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ApplicationDto>> CreateAsync([FromBody] ApplicationForCreationDto applicationForCreationDto)
+        public async Task<ActionResult<ApplicationDto>> CreateApplicationAsync([FromBody] ApplicationForCreationDto applicationForCreationDto)
         {
             var applicationForCreation = _mapper.Map<Application>(applicationForCreationDto);
 
@@ -69,32 +74,31 @@ namespace Harudka.Translation.Api.Controllers
 
             var applicationDto = _mapper.Map<ApplicationDto>(application);
 
-            return CreatedAtRoute("GetApplication", new { id = applicationDto.Id }, applicationDto);
+            return CreatedAtRoute("GetApplication", new { applicationId = applicationDto.Id }, applicationDto);
         }
 
         // PUT
         // api/applications/1
 
-
         /// <summary>
         /// Updates an existing application
         /// </summary>
-        /// <param name="id">application id</param>
+        /// <param name="applicationId">application id</param>
         /// <param name="applicationForUpdatingDto">Request model</param>
         /// <returns>A response with no content</returns>
         /// <response code="204">If an application was successfully updated</response>
         /// <response code="422">If there was a validation error</response>
-        /// <response code="404">If an application is not exists</response>
+        /// <response code="404">If an application does not exists</response>
         /// <response code="500">If there was an internal server error</response>
 
-        [HttpPut("{id}")]
+        [HttpPut("{applicationId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdateAsync(Guid id, [FromBody] ApplicationForUpdatingDto applicationForUpdatingDto)
+        public async Task<ActionResult> UpdateApplicationAsync(Guid applicationId, [FromBody] ApplicationForUpdatingDto applicationForUpdatingDto)
         {
-            var application = await _applicationRepository.GetAsync(id);
+            var application = await _applicationRepository.GetAsync(applicationId);
 
             if(application == null)
             {
@@ -114,20 +118,20 @@ namespace Harudka.Translation.Api.Controllers
         /// <summary>
         /// Retrieves an application by id
         /// </summary>
-        /// <param name="id">application id</param>
+        /// <param name="applicationId">application id</param>
         /// <returns>A response with an application</returns>
         /// <response code="200">If an application was successfully found</response>
-        /// <response code="404">If an application is not exists</response>
+        /// <response code="404">If an application does not exists</response>
         /// <response code="500">If there was an internal server error</response>
 
-        [HttpGet("{id}", Name = "GetApplication")]
-        [HttpHead("{id}")]
+        [HttpGet("{applicationId}", Name = "GetApplication")]
+        [HttpHead("{applicationId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ApplicationDto>> GetAsync(Guid id)
+        public async Task<ActionResult<ApplicationDto>> GetApplicationAsync(Guid applicationId)
         {
-            var application = await _applicationRepository.GetAsync(id);
+            var application = await _applicationRepository.GetAsync(applicationId);
 
             if(application == null)
             {
@@ -151,7 +155,7 @@ namespace Harudka.Translation.Api.Controllers
         [HttpHead]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IReadOnlyList<ApplicationDto>>> GetAllAsync()
+        public async Task<ActionResult<IReadOnlyList<ApplicationDto>>> GetAllApplicationsAsync()
         {
             var applications = await _applicationRepository.GetAllAsync();
 
@@ -164,19 +168,19 @@ namespace Harudka.Translation.Api.Controllers
         /// <summary>
         /// Deletes an application by id
         /// </summary>
-        /// <param name="id">application id</param>
+        /// <param name="applicationId">application id</param>
         /// <returns>A response with no content</returns>
         /// <response code="204">If an application was successfully deleted</response>
-        /// <response code="404">If an application is not exists</response>
+        /// <response code="404">If an application does not exists</response>
         /// <response code="500">If there was an internal server error</response>
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{applicationId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> DeleteAsync(Guid id)
+        public async Task<ActionResult> DeleteApplicationAsync(Guid applicationId)
         {
-            var application = await _applicationRepository.GetAsync(id);
+            var application = await _applicationRepository.GetAsync(applicationId);
 
             if(application == null)
             {
@@ -184,6 +188,121 @@ namespace Harudka.Translation.Api.Controllers
             }
 
             await _applicationRepository.DeleteAsync(application);
+
+            return NoContent();
+        }
+
+        // POST
+        // api/applications/1/languages
+
+        /// <summary>
+        /// Creates a new application language
+        /// </summary>
+        /// <param name="applicationId">application id</param>
+        /// <param name="applicationLanguageForCreationDto">Request model</param>
+        /// <returns>A response with a created application language</returns>
+        /// <response code="201">If an application language was successfully created</response>
+        /// <response code="422">If there was a validation error</response>
+        /// <response code="500">If there was an internal server error</response>
+
+        [HttpPost("{applicationId}/languages")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ApplicationLanguageDto>> CreateApplicationLanguageAsync(
+            [FromRoute] string applicationId,
+            [FromBody] ApplicationLanguageForCreationDto applicationLanguageForCreationDto)
+        {
+            var applicationLanguageForCreation = _mapper.Map<ApplicationLanguage>(applicationId, applicationLanguageForCreationDto);
+
+            var applicationLanguage = await _applicationLanguageRepository.CreateAsync(applicationLanguageForCreation);
+
+            var createdApplicationLanguageDto = _mapper.Map<ApplicationLanguageDto>(applicationLanguage);
+
+            return CreatedAtRoute("GetApplicationLanguage",
+                                  new { applicationId = applicationLanguageForCreation.ApplicationId, languageId = createdApplicationLanguageDto.LanguageId},
+                                  createdApplicationLanguageDto);
+        }
+
+        // GET HEAD
+        // api/applications/1/languages/1
+
+        /// <summary>
+        /// Retrieves an application language by applicationId and languageId
+        /// </summary>
+        /// <param name="applicationId">application id</param>
+        /// <param name="languageId">language id</param>
+        /// <returns>A response with an application language</returns>
+        /// <response code="200">If an application language was successfully found</response>
+        /// <response code="404">If an application language does not exists</response>
+        /// <response code="500">If there was an internal server error</response>
+
+        [HttpGet("{applicationId}/languages/{languageId}", Name = "GetApplicationLanguage")]
+        [HttpHead("{applicationId}/languages/{languageId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ApplicationLanguageDto>> GetApplicationLanguageAsync(Guid applicationId, short languageId)
+        {
+            var applicationLanguage = await _applicationLanguageRepository.GetAsync(applicationId, languageId);
+
+            if(applicationLanguage == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<ApplicationLanguageDto>(applicationLanguage));
+        }
+
+        // GET
+        // api/applications
+
+        /// <summary>
+        /// Retrieves application languages
+        /// </summary>
+        /// <param name="applicationId">application id</param>
+        /// <returns>A response with a list of application languages</returns>
+        /// <response code="200">If an application languages were successfully returned</response>
+        /// <response code="500">If there was an internal server error</response>
+
+        [HttpGet("{applicationId}/languages")]
+        [HttpHead("{applicationId}/languages")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IReadOnlyList<ApplicationLanguageDto>>> GetAllApplicationLanguagesAsync(Guid applicationId)
+        {
+            var applicationLanguages = await _applicationLanguageRepository.GetAllAsync(applicationId);
+
+            return Ok(_mapper.Map<IReadOnlyList<ApplicationLanguageDto>>(applicationLanguages));
+        }
+
+        // DELETE
+        // api/applications/1
+
+        /// <summary>
+        /// Deletes an application language by applicationId and languageId
+        /// </summary>
+        /// <param name="applicationId">application id</param>
+        /// <param name="languageId">language id</param>
+        /// <returns>A response with no content</returns>
+        /// <response code="204">If an application language was successfully deleted</response>
+        /// <response code="404">If an application language does not exists</response>
+        /// <response code="500">If there was an internal server error</response>
+
+        [HttpDelete("{applicationId}/languages/{languageId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> DeleteApplicationLanguageAsync(Guid applicationId, short languageId)
+        {
+            var applicationLanguage = await _applicationLanguageRepository.GetAsync(applicationId, languageId);
+
+            if(applicationLanguage == null)
+            {
+                return NotFound();
+            }
+
+            await _applicationLanguageRepository.DeleteAsync(applicationLanguage);
 
             return NoContent();
         }

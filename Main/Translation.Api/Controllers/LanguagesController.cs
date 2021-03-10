@@ -83,7 +83,7 @@ namespace Harudka.Translation.Api.Controllers
         /// <returns>A response with no content</returns>
         /// <response code="204">If a language was successfully updated</response>
         /// <response code="422">If there was a validation error</response>
-        /// <response code="404">If a language is not exists</response>
+        /// <response code="404">If a language does not exists</response>
         /// <response code="500">If there was an internal server error</response>
 
         [HttpPut("{id}")]
@@ -116,7 +116,7 @@ namespace Harudka.Translation.Api.Controllers
         /// <param name="id">language id</param>
         /// <returns>A response with a language</returns>
         /// <response code="200">If a language was successfully found</response>
-        /// <response code="404">If a language is not exists</response>
+        /// <response code="404">If a language does not exists</response>
         /// <response code="500">If there was an internal server error</response>
 
         [HttpGet("{id}", Name = "GetLanguage")]
@@ -166,7 +166,7 @@ namespace Harudka.Translation.Api.Controllers
         /// <param name="id">language id</param>
         /// <returns>A response with no content</returns>
         /// <response code="204">If a language was successfully deleted</response>
-        /// <response code="404">If a language is not exists</response>
+        /// <response code="404">If a language does not exists</response>
         /// <response code="500">If there was an internal server error</response>
 
         [HttpDelete("{id}")]
