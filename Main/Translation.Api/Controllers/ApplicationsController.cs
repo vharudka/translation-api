@@ -5,7 +5,7 @@
 using AutoMapper;
 using Harudka.Translation.Api.Domain;
 using Harudka.Translation.Api.Dto;
-using Harudka.Translation.Api.Helpers;
+using Harudka.Translation.Api.Extentions;
 using Harudka.Translation.Api.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

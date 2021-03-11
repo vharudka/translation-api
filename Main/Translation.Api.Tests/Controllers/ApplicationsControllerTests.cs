@@ -28,7 +28,6 @@ namespace Harudka.Translation.Api.Tests.Controllers
         private readonly ApplicationForUpdatingDtoBuilder _applicationForUpdatingDtoBuilder;
 
         private readonly ApplicationLanguageBuilder _applicationLanguageBuilder;
-        private readonly ApplicationLanguageDtoBuilder _applicationLanguageDtoBuilder;
         private readonly ApplicationLanguageForCreationDtoBuilder _applicationLanguageForCreationDtoBuilder;
         
         private readonly ApplicationsController _controller;
@@ -43,7 +42,6 @@ namespace Harudka.Translation.Api.Tests.Controllers
             _applicationForUpdatingDtoBuilder = new ApplicationForUpdatingDtoBuilder();
 
             _applicationLanguageBuilder = new ApplicationLanguageBuilder();
-            _applicationLanguageDtoBuilder = new ApplicationLanguageDtoBuilder();
             _applicationLanguageForCreationDtoBuilder = new ApplicationLanguageForCreationDtoBuilder();
 
             var config = new MapperConfiguration(options =>
@@ -419,7 +417,7 @@ namespace Harudka.Translation.Api.Tests.Controllers
             _applicationLanguageRepositoryMock.Setup(x => x.GetAsync(It.IsAny<Guid>(), It.IsAny<short>()))
                                               .ReturnsAsync(applicationLanguage);
 
-            var result = await _controller.DeleteApplicationAsync(Guid.NewGuid());
+            var result = await _controller.DeleteApplicationLanguageAsync(Guid.NewGuid(), 1);
 
             Assert.IsType<NotFoundResult>(result);
         }
@@ -437,7 +435,7 @@ namespace Harudka.Translation.Api.Tests.Controllers
             _applicationLanguageRepositoryMock.Setup(x => x.DeleteAsync(It.IsAny<ApplicationLanguage>()))
                                               .Verifiable();
 
-            var result = await _controller.DeleteApplicationAsync(applicationId);
+            var result = await _controller.DeleteApplicationLanguageAsync(applicationId, 1);
 
             _applicationRepositoryMock.Verify();
             Assert.IsType<NoContentResult>(result);

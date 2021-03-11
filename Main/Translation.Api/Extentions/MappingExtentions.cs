@@ -5,7 +5,7 @@
 using AutoMapper;
 using System.Linq;
 
-namespace Harudka.Translation.Api.Helpers
+namespace Harudka.Translation.Api.Extentions
 {
     public static class MappingExtentions
     {
@@ -14,7 +14,7 @@ namespace Harudka.Translation.Api.Helpers
             return Map(mapper, new TDestination(), sources);
         }
 
-        public static TDestination Map<TDestination>(this IMapper mapper, TDestination destination, params object[] sources)
+        private static TDestination Map<TDestination>(this IMapper mapper, TDestination destination, params object[] sources)
             where TDestination : new()
         {
             if(!sources.Any())

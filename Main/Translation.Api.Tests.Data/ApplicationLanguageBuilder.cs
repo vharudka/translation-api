@@ -11,13 +11,17 @@ namespace Harudka.Translation.Api.Tests.Data
     {
         private Guid _applicationId;
         private short _languageId;
+        private Application _application;
+        private Language _language;
 
         public ApplicationLanguage Build()
         {
             return new ApplicationLanguage
             {
                 ApplicationId = _applicationId,
-                LanguageId = _languageId
+                Application = _application,
+                LanguageId = _languageId,
+                Language = _language
             };
         }
 
@@ -27,9 +31,21 @@ namespace Harudka.Translation.Api.Tests.Data
             return this;
         }
 
+        public ApplicationLanguageBuilder WithApplication(Application value)
+        {
+            _application = value;
+            return this;
+        }
+
         public ApplicationLanguageBuilder WithLanguageId(short value)
         {
             _languageId = value;
+            return this;
+        }
+
+        public ApplicationLanguageBuilder WithLanguage(Language value)
+        {
+            _language = value;
             return this;
         }
     }

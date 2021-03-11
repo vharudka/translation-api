@@ -12,9 +12,21 @@ namespace Harudka.Translation.Api.Profiles
     {
         public LanguageProfile()
         {
-            CreateMap<Language, LanguageDto>();
-            CreateMap<LanguageForCreationDto, Language>();
-            CreateMap<LanguageForUpdatingDto, Language>();
+            CreateMap<Language, LanguageDto>()
+                .ForMember(d => d.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(d => d.Code, opt => opt.MapFrom(src => src.Code))
+                .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Name))
+                .ForAllOtherMembers(opt => opt.Ignore());
+
+            CreateMap<LanguageForCreationDto, Language>()
+                .ForMember(d => d.Code, opt => opt.MapFrom(src => src.Code))
+                .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Name))
+                .ForAllOtherMembers(opt => opt.Ignore());
+
+            CreateMap<LanguageForUpdatingDto, Language>()
+                .ForMember(d => d.Code, opt => opt.MapFrom(src => src.Code))
+                .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Name))
+                .ForAllOtherMembers(opt => opt.Ignore());
         }
     }
 }

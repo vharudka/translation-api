@@ -12,9 +12,17 @@ namespace Harudka.Translation.Api.Profiles
     {
         public ApplicationProfile()
         {
-            CreateMap<Application, ApplicationDto>();
-            CreateMap<ApplicationForCreationDto, Application>();
-            CreateMap<ApplicationForUpdatingDto, Application>();
+            CreateMap<Application, ApplicationDto>()
+                .ForMember(d => d.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Name));
+
+            CreateMap<ApplicationForCreationDto, Application>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Name))
+                .ForAllOtherMembers(opt => opt.Ignore());
+
+            CreateMap<ApplicationForUpdatingDto, Application>()
+                .ForMember(d => d.Name, opt => opt.MapFrom(src => src.Name))
+                .ForAllOtherMembers(opt => opt.Ignore());
         }
     }
 }
