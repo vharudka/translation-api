@@ -205,7 +205,7 @@ namespace Harudka.Translation.Api.Controllers
         /// <response code="422">If there was a validation error</response>
         /// <response code="500">If there was an internal server error</response>
 
-        [HttpPost("{applicationId}/languages")]
+        [HttpPost("{applicationId}/Languages")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -237,8 +237,8 @@ namespace Harudka.Translation.Api.Controllers
         /// <response code="404">If an application language does not exists</response>
         /// <response code="500">If there was an internal server error</response>
 
-        [HttpGet("{applicationId}/languages/{languageId}", Name = "GetApplicationLanguage")]
-        [HttpHead("{applicationId}/languages/{languageId}")]
+        [HttpGet("{applicationId}/Languages/{languageId}", Name = "GetApplicationLanguage")]
+        [HttpHead("{applicationId}/Languages/{languageId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -265,8 +265,8 @@ namespace Harudka.Translation.Api.Controllers
         /// <response code="200">If an application languages were successfully returned</response>
         /// <response code="500">If there was an internal server error</response>
 
-        [HttpGet("{applicationId}/languages")]
-        [HttpHead("{applicationId}/languages")]
+        [HttpGet("{applicationId}/Languages")]
+        [HttpHead("{applicationId}/Languages")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IReadOnlyList<ApplicationLanguageDto>>> GetAllApplicationLanguagesAsync(Guid applicationId)
@@ -289,7 +289,7 @@ namespace Harudka.Translation.Api.Controllers
         /// <response code="404">If an application language does not exists</response>
         /// <response code="500">If there was an internal server error</response>
 
-        [HttpDelete("{applicationId}/languages/{languageId}")]
+        [HttpDelete("{applicationId}/Languages/{languageId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

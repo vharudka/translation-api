@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0b2161af-8fe9-4c2f-8cc7-19953decf294",
+		"_postman_id": "f3ecc332-a7b2-48d4-9027-a7b04c9c143a",
 		"name": "Translation Api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,7 +14,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "84ee6f69-455a-4695-be28-445007e95c74",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -57,7 +56,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "be222796-0fe5-4332-a802-05d08c4b0685",
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -126,7 +124,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1295b512-9f6b-4590-b8fa-aaf900120cb7",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -196,7 +193,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "07e116cf-8ab3-4e7e-a87c-0b04305907d2",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -266,7 +262,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b0a08798-2efe-419b-b93b-c473588e4a39",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -343,7 +338,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "da9b4fd6-399f-4a47-9b0e-16dbec2279b8",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -416,7 +410,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0a6cdfe6-4aab-410d-95f0-c4b189eb646d",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -489,7 +482,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b2d68820-2295-4560-ad53-0733009df0e2",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -559,7 +551,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9930fc28-c16f-4c1f-a37e-3edf8e7936d6",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -629,7 +620,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a6ab38de-2bf1-4d4d-a4e9-db0ba52f4121",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -699,7 +689,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ee5d3d01-fc40-49fd-b944-46bf658af4ab",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -771,7 +760,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "2115f954-ecff-44d3-9259-39821ce36a48",
 								"exec": [
 									"pm.test(\"Status code is 500\", function () {\r",
 									"    pm.response.to.have.status(500);\r",
@@ -835,7 +823,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a0e55745-b971-4294-b2b0-1dc8e955af8b",
 								"exec": [
 									"pm.test(\"Status code is 500\", function () {\r",
 									"    pm.response.to.have.status(500);\r",
@@ -899,7 +886,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "5aef77ee-6002-4349-98ae-0e67c6e95462",
 								"exec": [
 									"pm.test(\"Status code is 204\", function () {\r",
 									"    pm.response.to.have.status(204);\r",
@@ -952,7 +938,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1852fedf-0a9d-4a84-8c74-27a80885459a",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -1023,7 +1008,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "58610b1e-5393-4999-818b-b153c471abad",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -1094,7 +1078,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "322ee2ff-1372-4868-af64-7de2f244001e",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -1172,7 +1155,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b2b8ceb4-f31c-43a2-8a28-df3f62e41e16",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -1246,7 +1228,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "85eb5d86-afbf-49db-9a4b-7c0bda036c60",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -1320,7 +1301,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "62438aea-3fdf-4061-965b-7c832408223a",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -1391,7 +1371,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "11bb7b27-1bf4-47b1-80fa-c98cc34c5c1d",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -1462,7 +1441,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "ddb7ff8e-caa9-4614-8e32-54a75a84ad21",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -1533,7 +1511,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "eb652850-3e2e-4f2d-91e8-a50cd193b229",
 								"exec": [
 									"pm.test(\"Status code is 404\", function () {\r",
 									"    pm.response.to.have.status(404);\r",
@@ -1595,7 +1572,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "78683d16-1aa8-4f59-865f-9c46fd4b52d1",
 								"exec": [
 									"pm.test(\"Status code is 500\", function () {\r",
 									"    pm.response.to.have.status(500);\r",
@@ -1659,7 +1635,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "6b08db49-de0a-4180-9473-5ce76592bff7",
 								"exec": [
 									"pm.test(\"Status code is 500\", function () {\r",
 									"    pm.response.to.have.status(500);\r",
@@ -1723,7 +1698,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "edd18d10-eca5-4a6f-b3ac-178f383f90bc",
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -1754,7 +1728,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9b713045-2d3e-48f4-8c26-43abdee2fab7",
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -1786,7 +1759,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a415b0c9-5bbb-4218-b926-392376a72c46",
 								"exec": [
 									"pm.test(\"Status code is 404\", function () {\r",
 									"    pm.response.to.have.status(404);\r",
@@ -1818,7 +1790,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4b3c93e5-b33d-4510-b28b-c9f24cb0fbbe",
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -1853,7 +1824,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a650db55-255d-4f19-8713-d464314a94b2",
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -1897,7 +1867,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a05ee522-399b-4660-bcb8-5b9f302c13b6",
 								"exec": [
 									"pm.test(\"Status code is 404\", function () {\r",
 									"    pm.response.to.have.status(404);\r",
@@ -1943,7 +1912,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fe1ee6d9-9c2e-486d-8268-6b1af861e0e0",
 								"exec": [
 									"pm.test(\"Status code is 204\", function () {\r",
 									"    pm.response.to.have.status(204);\r",
@@ -1980,7 +1948,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "a6df83dd-cb26-4b8b-8245-bfa4cdb6c250",
 								"exec": [
 									"pm.test(\"Status code is 404\", function () {\r",
 									"    pm.response.to.have.status(404);\r",
@@ -2020,8 +1987,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Applications",
@@ -2032,7 +1998,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b04d2de6-e56a-4443-85ed-831338ba590e",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -2075,7 +2040,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "c554b6fa-f830-408a-a202-d9b557694a4f",
 								"exec": [
 									"pm.test(\"Status code is 201\", function () {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -2144,7 +2108,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "27c42cef-3140-4992-9078-29819f53f66f",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -2214,7 +2177,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "16326eb2-fbf7-4fdd-848a-15ed345912aa",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -2284,7 +2246,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0fe8eb4b-acec-4611-90cc-6b8dde71235a",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -2354,7 +2315,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f89b7d6e-b1fe-49ab-bee4-2de1c46102f0",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -2426,7 +2386,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "5b53cf50-5f4d-43d8-a560-51d6d6498338",
 								"exec": [
 									"pm.test(\"Status code is 204\", function () {\r",
 									"    pm.response.to.have.status(204);\r",
@@ -2479,7 +2438,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "fa49645d-88ef-4f98-ac61-fa04ba5de338",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -2550,7 +2508,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "961f14a1-8b14-47ae-bd91-e92db776ae0d",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -2621,7 +2578,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e09ea38c-3add-42d4-9de9-e6bb6816b446",
 								"exec": [
 									"pm.test(\"Status code is 422\", function () {\r",
 									"    pm.response.to.have.status(422);\r",
@@ -2692,7 +2648,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "42df1263-694a-4268-b032-7cd2e009fdc3",
 								"exec": [
 									"pm.test(\"Status code is 404\", function () {\r",
 									"    pm.response.to.have.status(404);\r",
@@ -2754,7 +2709,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1705d1c4-8ddd-4ae6-b044-9ebdd8946246",
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -2785,7 +2739,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "9382e476-ddb9-4f6d-94b8-9d100448e474",
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -2817,7 +2770,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "05a024e2-5f7d-4d17-9a76-d742f5652fb9",
 								"exec": [
 									"pm.test(\"Status code is 404\", function () {\r",
 									"    pm.response.to.have.status(404);\r",
@@ -2849,7 +2801,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1a3113e8-c02a-41d2-a521-156f1c214782",
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -2884,7 +2835,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0c09c80c-d087-4346-a94b-e6da4e66271b",
 								"exec": [
 									"pm.test(\"Status test\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -2927,7 +2877,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "42142e23-9833-494e-b9c5-48c64567443b",
 								"exec": [
 									"pm.test(\"Status code is 404\", function () {\r",
 									"    pm.response.to.have.status(404);\r",
@@ -2973,7 +2922,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "63d6176b-6fa1-42a8-8c2e-70c3de6316e3",
 								"exec": [
 									"pm.test(\"Status code is 204\", function () {\r",
 									"    pm.response.to.have.status(204);\r",
@@ -3010,7 +2958,6 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "1c2e0afe-8341-44b9-a118-2bc2c673c99e",
 								"exec": [
 									"pm.test(\"Status code is 404\", function () {\r",
 									"    pm.response.to.have.status(404);\r",
@@ -3050,15 +2997,425 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
+		},
+		{
+			"name": "Application Languages",
+			"item": [
+				{
+					"name": "Create - 201 - Created",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Location header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Location\");\r",
+									"\r",
+									"    const data = pm.response.json();\r",
+									"\r",
+									"    const locationUrl = `${pm.environment.get(\"base_url\")}/${pm.collectionVariables.get(\"application_route\")}/${pm.collectionVariables.get(\"application_id\")}/${pm.collectionVariables.get(\"language_route\")}/${data.languageId}`;\r",
+									"    pm.expect(pm.response.headers.get(\"Location\")).to.eq(locationUrl);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"languageId\": {{language_id}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_route}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_route}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create - 500 - LanguageId is undefined",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(data.Extensions.traceId).is.not.oneOf([null, undefined])\r",
+									"\r",
+									"    pm.expect(data.Type).to.eql(pm.collectionVariables.get(\"general_500_type\"));\r",
+									"    pm.expect(data.Title).to.eql(pm.collectionVariables.get(\"general_500_title\"));\r",
+									"    pm.expect(data.Detail).to.eql(pm.collectionVariables.get(\"general_500_detail\"));\r",
+									"    pm.expect(data.Status).to.eql(500);\r",
+									"\r",
+									"    pm.expect(data.Instance).to.eql(`/api/${pm.collectionVariables.get(\"application_route\")}/${pm.collectionVariables.get(\"application_id\")}/${pm.collectionVariables.get(\"language_route\")}`);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_route}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_route}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create - 400 - LanguageId is null",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(data.traceId).is.not.oneOf([null, undefined])\r",
+									"    pm.expect(data.errors).is.not.oneOf([null, undefined])\r",
+									"\r",
+									"    pm.expect(data.type).to.eql(pm.collectionVariables.get(\"general_400_type\"));\r",
+									"    pm.expect(data.title).to.eql(pm.collectionVariables.get(\"general_400_title\"));\r",
+									"    pm.expect(data.detail).to.eql(pm.collectionVariables.get(\"general_400_detail\"));\r",
+									"    pm.expect(data.status).to.eql(400);\r",
+									"\r",
+									"    pm.expect(data.instance).to.eql(`/api/${pm.collectionVariables.get(\"application_route\")}/${pm.collectionVariables.get(\"application_id\")}/${pm.collectionVariables.get(\"language_route\")}`);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"languageId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_route}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_route}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All - 200 - Ok",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_route}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_route}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get - 200 - Ok",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"\r",
+									"    pm.expect(data.applicationId).to.eql(pm.variables.get(\"application_id\"));\r",
+									"    pm.expect(data.applicationName).to.eql(pm.variables.get(\"application_name\"));\r",
+									"    pm.expect(data.languageId).to.eql(pm.variables.get(\"language_id\"));\r",
+									"    pm.expect(data.languageCode).to.eql(pm.variables.get(\"language_code\"));\r",
+									"    pm.expect(data.languageName).to.eql(pm.variables.get(\"language_name\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_route}}/{{language_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_route}}",
+								"{{language_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get - 404 - Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(data.traceId).is.not.oneOf([null, undefined])\r",
+									"\r",
+									"    pm.expect(data.type).to.eql(pm.collectionVariables.get(\"general_404_type\"));\r",
+									"    pm.expect(data.title).to.eql(pm.collectionVariables.get(\"general_404_title\"));\r",
+									"    pm.expect(data.status).to.eql(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_route}}/0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_route}}",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete - 204 - No Content",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"There is no response body\", function () {\r",
+									"    var response = (_.isEmpty(responseBody));\r",
+									"    pm.expect(response).to.be.true\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_route}}/{{language_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_route}}",
+								"{{language_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete - 404 - Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(data.traceId).is.not.oneOf([null, undefined])\r",
+									"\r",
+									"    pm.expect(data.type).to.eql(pm.collectionVariables.get(\"general_404_type\"));\r",
+									"    pm.expect(data.title).to.eql(pm.collectionVariables.get(\"general_404_title\"));\r",
+									"    pm.expect(data.status).to.eql(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_route}}/0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_route}}",
+								"0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "c9ef614d-01da-4ce9-a2de-65608b89828d",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -3068,7 +3425,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "6b90d815-82c9-4488-bca6-8aa31963fd7d",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -3078,130 +3434,116 @@
 	],
 	"variable": [
 		{
-			"id": "94de81cc-759c-4905-9bd5-085b90a6de2f",
+			"key": "general_400_type",
+			"value": "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+		},
+		{
+			"key": "general_400_title",
+			"value": "One or more validation errors occurred."
+		},
+		{
+			"key": "general_400_detail",
+			"value": "See the errors field for details."
+		},
+		{
 			"key": "general_404_type",
 			"value": "https://tools.ietf.org/html/rfc7231#section-6.5.4"
 		},
 		{
-			"id": "3bfca3fe-7718-407c-a2c0-5a8d17eb6d6c",
 			"key": "general_404_title",
 			"value": "Not Found"
 		},
 		{
-			"id": "373073b8-6671-4cc5-8549-c2e77732a85e",
 			"key": "general_422_type",
 			"value": "https://tools.ietf.org/html/rfc4918#section-11.2"
 		},
 		{
-			"id": "9d95a55a-807d-42be-a623-b7b31062315b",
 			"key": "general_422_title",
 			"value": "One or more validation errors occurred."
 		},
 		{
-			"id": "86abfa2b-7cb5-40e9-8fdd-24aea24230f5",
 			"key": "general_422_detail",
 			"value": "See the errors field for details."
 		},
 		{
-			"id": "031b4517-d01b-4213-b05c-e58d7cde72c4",
 			"key": "general_422_error_empty",
 			"value": "'<propertyName>' must not be empty."
 		},
 		{
-			"id": "41e2b0c0-ed08-490b-812c-2e91d212907d",
 			"key": "general_422_error_length",
 			"value": "'<propertyName>' must be between <min> and <max> characters. You entered <length> characters."
 		},
 		{
-			"id": "22e8ff24-e5f7-49d3-a25c-f672f65bf893",
 			"key": "general_422_error_max_length",
 			"value": "The length of '<propertyName>' must be <max> characters or fewer. You entered <length> characters."
 		},
 		{
-			"id": "e78816cd-9998-4f95-91a5-fef195d38259",
 			"key": "general_500_type",
 			"value": "https://tools.ietf.org/html/rfc7231#section-6.6.1"
 		},
 		{
-			"id": "3e4fc2a0-e3ff-4e07-acf2-fe40c017e2d3",
 			"key": "general_500_title",
 			"value": "Internal Server Error"
 		},
 		{
-			"id": "cbdee3b8-7107-432f-b4ec-aece92dc9d51",
 			"key": "general_500_detail",
 			"value": "An error has occured while processing the request."
 		},
 		{
-			"id": "0f61063a-15cf-4f43-98e8-c68459ba6a88",
 			"key": "language_route",
 			"value": "Languages"
 		},
 		{
-			"id": "3af1dc51-5d6d-40a3-99b4-ec42285cc7ac",
 			"key": "language_id",
 			"value": "0"
 		},
 		{
-			"id": "beb50401-fca8-4fc7-9c92-79d61d5bc1af",
 			"key": "language_code",
 			"value": "tt"
 		},
 		{
-			"id": "9ff95ee9-5d76-4fcf-98eb-749cddfe5ec9",
 			"key": "language_name",
 			"value": "EnglishTest"
 		},
 		{
-			"id": "c5d2565d-a8f4-4478-b120-af136ed61ac8",
 			"key": "language_code_updated",
 			"value": "dd"
 		},
 		{
-			"id": "1fb4785e-243d-4f50-a83f-3eef1be45b27",
 			"key": "language_name_updated",
 			"value": "EnglishTestUpdated"
 		},
 		{
-			"id": "cbc3a55f-433d-436f-8467-8719b9e07cc3",
 			"key": "language_code_min",
 			"value": "2"
 		},
 		{
-			"id": "010b5464-ca37-4a55-a79d-f75e922e1929",
 			"key": "language_code_max",
 			"value": "2"
 		},
 		{
-			"id": "2af4067b-ed09-45c7-b6d4-406d102e7367",
 			"key": "language_name_max",
 			"value": "100"
 		},
 		{
-			"id": "0ea036a0-cf5f-4feb-9dd6-1d44aff436f9",
 			"key": "application_route",
 			"value": "Applications"
 		},
 		{
-			"id": "d2599db9-b6a0-4242-852d-69399400fe69",
 			"key": "application_id",
 			"value": "21358142-5aff-418c-0ae7-08d890856fab"
 		},
 		{
-			"id": "fdc071bb-83d1-402d-b211-5d52f48151c1",
 			"key": "application_name",
 			"value": "TestApplicationName"
 		},
 		{
-			"id": "1c322905-6dc7-4cb4-8d84-3a70569adc13",
 			"key": "application_name_updated",
 			"value": "TestApplicationNameUpdated"
 		},
 		{
-			"id": "70ec248d-531d-4579-88a8-4c6f5252032d",
 			"key": "application_name_max",
 			"value": "100"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
