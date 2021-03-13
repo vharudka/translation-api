@@ -46,6 +46,7 @@ namespace Harudka.Translation.Api
             services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IApplicationLanguageRepository, ApplicationLanguageRepository>();
+            services.AddScoped<ILanguageResourceGroupRepository, LanguageResourceGroupRepository>();
 
             services.AddControllers()
                     .AddFluentValidation(options =>

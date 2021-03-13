@@ -21,14 +21,17 @@ namespace Harudka.Translation.Api.Controllers
     {
         private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationLanguageRepository _applicationLanguageRepository;
+        private readonly ILanguageResourceGroupRepository _languageResourceGroupRepository;
         private readonly IMapper _mapper;
 
         public ApplicationsController(IApplicationRepository applicationRepository,
                                       IApplicationLanguageRepository applicationLanguageRepository,
+                                      ILanguageResourceGroupRepository languageResourceGroupRepository,
                                       IMapper mapper)
         {
             _applicationRepository = applicationRepository;
             _applicationLanguageRepository = applicationLanguageRepository;
+            _languageResourceGroupRepository = languageResourceGroupRepository;
             _mapper = mapper;
         }
 
@@ -78,7 +81,7 @@ namespace Harudka.Translation.Api.Controllers
         }
 
         // PUT
-        // api/applications/1
+        // api/applications/e507b516-77d7-48a4-53d1-08d8e4f05701
 
         /// <summary>
         /// Updates an existing application
@@ -113,7 +116,7 @@ namespace Harudka.Translation.Api.Controllers
         }
 
         // GET HEAD
-        // api/applications/1
+        // api/applications/e507b516-77d7-48a4-53d1-08d8e4f05701
 
         /// <summary>
         /// Retrieves an application by id
@@ -163,7 +166,7 @@ namespace Harudka.Translation.Api.Controllers
         }
 
         // DELETE
-        // api/applications/1
+        // api/applications/e507b516-77d7-48a4-53d1-08d8e4f05701
 
         /// <summary>
         /// Deletes an application by id
@@ -193,7 +196,7 @@ namespace Harudka.Translation.Api.Controllers
         }
 
         // POST
-        // api/applications/1/languages
+        // api/applications/e507b516-77d7-48a4-53d1-08d8e4f05701/languages
 
         /// <summary>
         /// Creates a new application language
@@ -225,7 +228,7 @@ namespace Harudka.Translation.Api.Controllers
         }
 
         // GET HEAD
-        // api/applications/1/languages/1
+        // api/applications/e507b516-77d7-48a4-53d1-08d8e4f05701/languages/1
 
         /// <summary>
         /// Retrieves an application language by applicationId and languageId
@@ -255,7 +258,7 @@ namespace Harudka.Translation.Api.Controllers
         }
 
         // GET
-        // api/applications
+        // api/applications/e507b516-77d7-48a4-53d1-08d8e4f05701/languages
 
         /// <summary>
         /// Retrieves application languages
@@ -277,7 +280,7 @@ namespace Harudka.Translation.Api.Controllers
         }
 
         // DELETE
-        // api/applications/1
+        // api/applications/e507b516-77d7-48a4-53d1-08d8e4f05701/languages/1
 
         /// <summary>
         /// Deletes an application language by applicationId and languageId
@@ -303,6 +306,122 @@ namespace Harudka.Translation.Api.Controllers
             }
 
             await _applicationLanguageRepository.DeleteAsync(applicationLanguage);
+
+            return NoContent();
+        }
+
+        // POST
+        // api/applications/e507b516-77d7-48a4-53d1-08d8e4f05701/language-resource-groups
+
+        /// <summary>
+        /// Creates a new application language resource group
+        /// </summary>
+        /// <param name="applicationId">application id</param>
+        /// <param name="languageResourceGroupForCreationDto">Request model</param>
+        /// <returns>A response with a created application language resource group</returns>
+        /// <response code="201">If an application language resource group was successfully created</response>
+        /// <response code="422">If there was a validation error</response>
+        /// <response code="500">If there was an internal server error</response>
+
+        [HttpPost("{applicationId}/Language-resource-groups")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<LanguageResourceGroupDto>> CreateApplicationLanguageResourceGroupAsync(
+            [FromRoute] string applicationId,
+            [FromBody] LanguageResourceGroupForCreationDto languageResourceGroupForCreationDto)
+        {
+            var languageResourceGroupForCreation = _mapper.Map<LanguageResourceGroup>(applicationId, languageResourceGroupForCreationDto);
+
+            var languageResourceGroup = await _languageResourceGroupRepository.CreateAsync(languageResourceGroupForCreation);
+
+            var createdApplicationLanguageDto = _mapper.Map<LanguageResourceGroupDto>(languageResourceGroup);
+
+            return CreatedAtRoute("GetApplicationLanguageResourceGroup",
+                                  new { applicationId = languageResourceGroupForCreation.ApplicationId, languageResourceGroupId = createdApplicationLanguageDto.Id },
+                                  createdApplicationLanguageDto);
+        }
+
+        // GET HEAD
+        // api/applications/e507b516-77d7-48a4-53d1-08d8e4f05701/language-resource-groups/1
+
+        /// <summary>
+        /// Retrieves an application language resource group by applicationId and language resource group id
+        /// </summary>
+        /// <param name="applicationId">application id</param>
+        /// <param name="languageResourceGroupId">language resource group id</param>
+        /// <returns>A response with an application language resource group</returns>
+        /// <response code="200">If an application language resource group was successfully found</response>
+        /// <response code="404">If an application language resource group does not exists</response>
+        /// <response code="500">If there was an internal server error</response>
+
+        [HttpGet("{applicationId}/Language-resource-groups/{languageResourceGroupId}", Name = "GetApplicationLanguageResourceGroup")]
+        [HttpHead("{applicationId}/Language-resource-groups/{languageResourceGroupId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<LanguageResourceGroupDto>> GetApplicationLanguageResourceGroupAsync(
+            Guid applicationId, int languageResourceGroupId)
+        {
+            var languageResourceGroup = await _languageResourceGroupRepository.GetAsync(applicationId, languageResourceGroupId);
+
+            if(languageResourceGroup == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<LanguageResourceGroupDto>(languageResourceGroup));
+        }
+
+        // GET
+        // api/applications/e507b516-77d7-48a4-53d1-08d8e4f05701/language-resource-groups
+
+        /// <summary>
+        /// Retrieves application language resource groups
+        /// </summary>
+        /// <param name="applicationId">application id</param>
+        /// <returns>A response with a list of application language resource groups</returns>
+        /// <response code="200">If an application language resource groups were successfully returned</response>
+        /// <response code="500">If there was an internal server error</response>
+
+        [HttpGet("{applicationId}/Language-resource-groups")]
+        [HttpHead("{applicationId}/Language-resource-groups")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IReadOnlyList<LanguageResourceGroupDto>>> GetAllApplicationLanguageResourceGroupsAsync(Guid applicationId)
+        {
+            var languageResourceGroups = await _languageResourceGroupRepository.GetAllAsync(applicationId);
+
+            return Ok(_mapper.Map<IReadOnlyList<LanguageResourceGroupDto>>(languageResourceGroups));
+        }
+
+        // DELETE
+        // api/applications/e507b516-77d7-48a4-53d1-08d8e4f05701/language-resource-groups/1
+
+        /// <summary>
+        /// Deletes an application language resource group by applicationId and language resource group id
+        /// </summary>
+        /// <param name="applicationId">application id</param>
+        /// <param name="languageResourceGroupId">language resource group id</param>
+        /// <returns>A response with no content</returns>
+        /// <response code="204">If an application language resource group was successfully deleted</response>
+        /// <response code="404">If an application language resource group does not exists</response>
+        /// <response code="500">If there was an internal server error</response>
+
+        [HttpDelete("{applicationId}/Language-resource-groups/{languageResourceGroupId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> DeleteApplicationLanguageResourceGroupAsync(Guid applicationId, int languageResourceGroupId)
+        {
+            var languageResourceGroup = await _languageResourceGroupRepository.GetAsync(applicationId, languageResourceGroupId);
+
+            if(languageResourceGroup == null)
+            {
+                return NotFound();
+            }
+
+            await _languageResourceGroupRepository.DeleteAsync(languageResourceGroup);
 
             return NoContent();
         }

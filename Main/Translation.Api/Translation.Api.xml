@@ -103,6 +103,48 @@
             <response code="404">If an application language does not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.CreateApplicationLanguageResourceGroupAsync(System.String,Harudka.Translation.Api.Dto.LanguageResourceGroupForCreationDto)">
+            <summary>
+            Creates a new application language resource group
+            </summary>
+            <param name="applicationId">application id</param>
+            <param name="languageResourceGroupForCreationDto">Request model</param>
+            <returns>A response with a created application language resource group</returns>
+            <response code="201">If an application language resource group was successfully created</response>
+            <response code="422">If there was a validation error</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetApplicationLanguageResourceGroupAsync(System.Guid,System.Int32)">
+            <summary>
+            Retrieves an application language resource group by applicationId and language resource group id
+            </summary>
+            <param name="applicationId">application id</param>
+            <param name="languageResourceGroupId">language resource group id</param>
+            <returns>A response with an application language resource group</returns>
+            <response code="200">If an application language resource group was successfully found</response>
+            <response code="404">If an application language resource group does not exists</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetAllApplicationLanguageResourceGroupsAsync(System.Guid)">
+            <summary>
+            Retrieves application language resource groups
+            </summary>
+            <param name="applicationId">application id</param>
+            <returns>A response with a list of application language resource groups</returns>
+            <response code="200">If an application language resource groups were successfully returned</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.DeleteApplicationLanguageResourceGroupAsync(System.Guid,System.Int32)">
+            <summary>
+            Deletes an application language resource group by applicationId and language resource group id
+            </summary>
+            <param name="applicationId">application id</param>
+            <param name="languageResourceGroupId">language resource group id</param>
+            <returns>A response with no content</returns>
+            <response code="204">If an application language resource group was successfully deleted</response>
+            <response code="404">If an application language resource group does not exists</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
         <member name="M:Harudka.Translation.Api.Controllers.LanguagesController.GetOptions">
             <summary>
             Retrieves allow header

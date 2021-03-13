@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Domain", "T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Data", "Translation.Api.Data\Translation.Api.Data.csproj", "{071BF869-9D41-462F-9EB6-30BCBC563601}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Repository", "Translation.Api.Service\Translation.Api.Repository.csproj", "{59330750-BD5D-4ED4-8CF5-9E3F3E1BA103}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Repository", "Translation.Api.Repository\Translation.Api.Repository.csproj", "{59330750-BD5D-4ED4-8CF5-9E3F3E1BA103}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Translation.Api.Dto", "Translation.Api.Dto\Translation.Api.Dto.csproj", "{46C7933A-8762-44AB-AC87-A84A589BA747}"
 EndProject

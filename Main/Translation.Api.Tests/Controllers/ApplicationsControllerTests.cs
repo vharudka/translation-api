@@ -6,6 +6,7 @@ using AutoMapper;
 using Harudka.Translation.Api.Controllers;
 using Harudka.Translation.Api.Domain;
 using Harudka.Translation.Api.Dto;
+using Harudka.Translation.Api.Profiles;
 using Harudka.Translation.Api.Repository;
 using Harudka.Translation.Api.Tests.Data;
 using Microsoft.AspNetCore.Http;
@@ -22,6 +23,7 @@ namespace Harudka.Translation.Api.Tests.Controllers
     {
         private readonly Mock<IApplicationRepository> _applicationRepositoryMock;
         private readonly Mock<IApplicationLanguageRepository> _applicationLanguageRepositoryMock;
+        private readonly Mock<ILanguageResourceGroupRepository> _languageResourceGroupRepositoryMock;
 
         private readonly ApplicationBuilder _applicationBuilder;
         private readonly ApplicationForCreationDtoBuilder _applicationForCreationDtoBuilder;
@@ -29,13 +31,17 @@ namespace Harudka.Translation.Api.Tests.Controllers
 
         private readonly ApplicationLanguageBuilder _applicationLanguageBuilder;
         private readonly ApplicationLanguageForCreationDtoBuilder _applicationLanguageForCreationDtoBuilder;
-        
+
+        private readonly LanguageResourceGroupBuilder _languageResourceGroupBuilder;
+        private readonly LanguageResourceGroupForCreationDtoBuilder _languageResourceGroupForCreationDtoBuilder;
+
         private readonly ApplicationsController _controller;
 
         public ApplicationsControllerTests()
         {
             _applicationRepositoryMock = new Mock<IApplicationRepository>();
             _applicationLanguageRepositoryMock = new Mock<IApplicationLanguageRepository>();
+            _languageResourceGroupRepositoryMock = new Mock<ILanguageResourceGroupRepository>();
 
             _applicationBuilder = new ApplicationBuilder();
             _applicationForCreationDtoBuilder = new ApplicationForCreationDtoBuilder();
@@ -44,32 +50,21 @@ namespace Harudka.Translation.Api.Tests.Controllers
             _applicationLanguageBuilder = new ApplicationLanguageBuilder();
             _applicationLanguageForCreationDtoBuilder = new ApplicationLanguageForCreationDtoBuilder();
 
+            _languageResourceGroupBuilder = new LanguageResourceGroupBuilder();
+            _languageResourceGroupForCreationDtoBuilder = new LanguageResourceGroupForCreationDtoBuilder();
+
             var config = new MapperConfiguration(options =>
             {
-                options.CreateMap<Application, ApplicationDto>();
-                options.CreateMap<ApplicationForCreationDto, Application>();
-                options.CreateMap<ApplicationForUpdatingDto, Application>();
-
-                options.CreateMap<ApplicationLanguage, ApplicationLanguageDto>()
-                       .ForMember(d => d.ApplicationId, opt => opt.MapFrom(src => src.ApplicationId))
-                       .ForMember(d => d.ApplicationName, opt => opt.MapFrom(src => src.Application.Name))
-                       .ForMember(d => d.LanguageId, opt => opt.MapFrom(src => src.LanguageId))
-                       .ForMember(d => d.LanguageCode, opt => opt.MapFrom(src => src.Language.Code))
-                       .ForMember(d => d.LanguageName, opt => opt.MapFrom(src => src.Language.Name));
-
-                options.CreateMap<ApplicationLanguageForCreationDto, ApplicationLanguage>()
-                       .ForMember(d => d.LanguageId, opt => opt.MapFrom(src => src.LanguageId))
-                       .ForAllOtherMembers(opt => opt.Ignore());
-
-                options.CreateMap<string, ApplicationLanguage>()
-                       .ForMember(d => d.ApplicationId, opt => opt.MapFrom(src => new Guid(src)))
-                       .ForAllOtherMembers(opt => opt.Ignore());
+                options.AddProfile<ApplicationProfile>();
+                options.AddProfile<ApplicationLanguageProfile>();
+                options.AddProfile<LanguageResourceGroupProfile>();
 
             });
             var mapper = config.CreateMapper();
 
             var httpContext = new DefaultHttpContext();
-            _controller = new ApplicationsController(_applicationRepositoryMock.Object, _applicationLanguageRepositoryMock.Object, mapper)
+            _controller = new ApplicationsController(_applicationRepositoryMock.Object, _applicationLanguageRepositoryMock.Object,
+                                                     _languageResourceGroupRepositoryMock.Object, mapper)
             {
                 ControllerContext = new ControllerContext()
                 {
@@ -436,6 +431,204 @@ namespace Harudka.Translation.Api.Tests.Controllers
                                               .Verifiable();
 
             var result = await _controller.DeleteApplicationLanguageAsync(applicationId, 1);
+
+            _applicationRepositoryMock.Verify();
+            Assert.IsType<NoContentResult>(result);
+        }
+
+        [Fact]
+        public async Task CreateApplicationLanguageResourceGroupAsync_ReturnsCreatedResponse()
+        {
+            var applicationId = Guid.NewGuid();
+            var languageResourceGroupName = "TestLanguageResourceGroup";
+            var application = _applicationBuilder.WithId(applicationId)
+                                                 .WithName("TestApplication")
+                                                 .Build();
+            var languageResourceGroup = _languageResourceGroupBuilder.WithId(1)
+                                                                     .WithName(languageResourceGroupName)
+                                                                     .WithApplicationId(applicationId)
+                                                                     .WithApplication(application)
+                                                                     .Build();
+            var languageResourceGroupForCreationDto = _languageResourceGroupForCreationDtoBuilder.WithName(languageResourceGroupName)
+                                                                                                 .Build();
+
+            _languageResourceGroupRepositoryMock.Setup(x => x.CreateAsync(It.IsAny<LanguageResourceGroup>()))
+                                                .ReturnsAsync(languageResourceGroup);
+
+            var result = await _controller.CreateApplicationLanguageResourceGroupAsync(applicationId.ToString(), languageResourceGroupForCreationDto);
+
+            Assert.IsType<CreatedAtRouteResult>(result.Result);
+        }
+
+        [Fact]
+        public async Task CreateLanguageResourceGroupAsync_ReturnsCreatedItem()
+        {
+            var applicationId = Guid.NewGuid();
+            var languageResourceGroupName = "TestLanguageResourceGroup";
+            var application = _applicationBuilder.WithId(applicationId)
+                                                 .WithName("TestApplication")
+                                                 .Build();
+            var languageResourceGroup = _languageResourceGroupBuilder.WithId(1)
+                                                                     .WithName(languageResourceGroupName)
+                                                                     .WithApplicationId(applicationId)
+                                                                     .WithApplication(application)
+                                                                     .Build();
+            var languageResourceGroupForCreationDto = _languageResourceGroupForCreationDtoBuilder.WithName(languageResourceGroupName)
+                                                                                                 .Build();
+
+            _languageResourceGroupRepositoryMock.Setup(x => x.CreateAsync(It.IsAny<LanguageResourceGroup>()))
+                                                .ReturnsAsync(languageResourceGroup);
+
+            var result = await _controller.CreateApplicationLanguageResourceGroupAsync(applicationId.ToString(), languageResourceGroupForCreationDto);
+
+            var okObjectResult = result.Result as CreatedAtRouteResult;
+
+            var item = Assert.IsType<LanguageResourceGroupDto>(okObjectResult.Value);
+            Assert.Equal(languageResourceGroup.Id, item.Id);
+            Assert.Equal(languageResourceGroup.Name, item.Name);
+        }
+
+        [Fact]
+        public async Task GetLanguageResourceGroupAsync_ReturnsNotFoundResult()
+        {
+            LanguageResourceGroup languageResourceGroup = null;
+
+            _languageResourceGroupRepositoryMock.Setup(x => x.GetAsync(It.IsAny<Guid>(), It.IsAny<int>()))
+                                                .ReturnsAsync(languageResourceGroup);
+
+            var result = await _controller.GetApplicationLanguageResourceGroupAsync(Guid.NewGuid(), 1);
+
+            Assert.IsType<NotFoundResult>(result.Result);
+        }
+
+        [Fact]
+        public async Task GetLanguageResourceGroupAsync_ReturnsOkResult()
+        {
+            var applicationId = Guid.NewGuid();
+            var languageResourceGroupName = "TestLanguageResourceGroup";
+            var application = _applicationBuilder.WithId(applicationId)
+                                                 .WithName("TestApplication")
+                                                 .Build();
+            var languageResourceGroup = _languageResourceGroupBuilder.WithId(1)
+                                                                     .WithName(languageResourceGroupName)
+                                                                     .WithApplicationId(applicationId)
+                                                                     .WithApplication(application)
+                                                                     .Build();
+
+            _languageResourceGroupRepositoryMock.Setup(x => x.GetAsync(It.IsAny<Guid>(), It.IsAny<int>()))
+                                                .ReturnsAsync(languageResourceGroup);
+
+            var result = await _controller.GetApplicationLanguageResourceGroupAsync(applicationId, 1);
+
+            Assert.IsType<OkObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public async Task GetLanguageResourceGroupAsync_ReturnsRightItem()
+        {
+            var applicationId = Guid.NewGuid();
+            var languageResourceGroupName = "TestLanguageResourceGroup";
+            var application = _applicationBuilder.WithId(applicationId)
+                                                 .WithName("TestApplication")
+                                                 .Build();
+            var languageResourceGroup = _languageResourceGroupBuilder.WithId(1)
+                                                                     .WithName(languageResourceGroupName)
+                                                                     .WithApplicationId(applicationId)
+                                                                     .WithApplication(application)
+                                                                     .Build();
+
+            _languageResourceGroupRepositoryMock.Setup(x => x.GetAsync(It.IsAny<Guid>(), It.IsAny<int>()))
+                                                .ReturnsAsync(languageResourceGroup);
+
+            var result = await _controller.GetApplicationLanguageResourceGroupAsync(applicationId, 1);
+
+            var okObjectResult = result.Result as OkObjectResult;
+
+            var item = Assert.IsType<LanguageResourceGroupDto>(okObjectResult.Value);
+            Assert.Equal(languageResourceGroup.Id, item.Id);
+            Assert.Equal(languageResourceGroup.Name, item.Name);
+        }
+
+        [Fact]
+        public async Task GetAllLanguageResourceGroupsAsync_ReturnsOkResult()
+        {
+            var applicationId = Guid.NewGuid();
+            var languageResourceGroups = new List<LanguageResourceGroup>();
+
+            _languageResourceGroupRepositoryMock.Setup(x => x.GetAllAsync(applicationId))
+                                                .ReturnsAsync(languageResourceGroups);
+
+            var result = await _controller.GetAllApplicationLanguageResourceGroupsAsync(applicationId);
+
+            Assert.IsType<OkObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public async Task GetAllLanguageResourceGroupsAsync_ReturnsAllItems()
+        {
+            var applicationId = Guid.NewGuid();
+
+            var application = _applicationBuilder.WithId(applicationId)
+                                                 .WithName("TestApplication")
+                                                 .Build();
+
+            var languageResourceGroups = new List<LanguageResourceGroup>
+            {
+                _languageResourceGroupBuilder.WithId(1)
+                                             .WithName("TestLanguageResourceGroup")
+                                             .WithApplicationId(applicationId)
+                                             .WithApplication(application)
+                                             .Build(),
+                _languageResourceGroupBuilder.WithId(1)
+                                             .WithName("TestLanguageResourceGroup")
+                                             .WithApplicationId(applicationId)
+                                             .WithApplication(application)
+                                             .Build()
+            };
+
+            _languageResourceGroupRepositoryMock.Setup(x => x.GetAllAsync(applicationId))
+                                                .ReturnsAsync(languageResourceGroups);
+
+            var result = await _controller.GetAllApplicationLanguageResourceGroupsAsync(applicationId);
+
+            var okObjectResult = result.Result as OkObjectResult;
+
+            var items = Assert.IsAssignableFrom<IReadOnlyList<LanguageResourceGroupDto>>(okObjectResult.Value);
+            Assert.Equal(2, items.Count);
+        }
+
+        [Fact]
+        public async Task DeleteLanguageResourceGroupAsync_ReturnsNotFoundResult()
+        {
+            LanguageResourceGroup applicationLanguage = null;
+
+            _languageResourceGroupRepositoryMock.Setup(x => x.GetAsync(It.IsAny<Guid>(), It.IsAny<int>()))
+                                                .ReturnsAsync(applicationLanguage);
+
+            var result = await _controller.DeleteApplicationLanguageResourceGroupAsync(Guid.NewGuid(), 1);
+
+            Assert.IsType<NotFoundResult>(result);
+        }
+
+        [Fact]
+        public async Task DeleteLanguageResourceGroupAsync_ReturnsOkResult()
+        {
+            var applicationId = Guid.NewGuid();
+            var application = _applicationBuilder.WithId(applicationId)
+                                                 .WithName("TestApplication")
+                                                 .Build();
+            var languageResourceGroup = _languageResourceGroupBuilder.WithId(1)
+                                                                     .WithName("TestLanguageResourceGroup")
+                                                                     .WithApplicationId(applicationId)
+                                                                     .WithApplication(application)
+                                                                     .Build();
+
+            _languageResourceGroupRepositoryMock.Setup(x => x.GetAsync(It.IsAny<Guid>(), It.IsAny<int>()))
+                                                .ReturnsAsync(languageResourceGroup);
+            _languageResourceGroupRepositoryMock.Setup(x => x.DeleteAsync(It.IsAny<LanguageResourceGroup>()))
+                                                .Verifiable();
+
+            var result = await _controller.DeleteApplicationLanguageResourceGroupAsync(applicationId, 1);
 
             _applicationRepositoryMock.Verify();
             Assert.IsType<NoContentResult>(result);
