@@ -3410,6 +3410,572 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Language Resource Group",
+			"item": [
+				{
+					"name": "Create - 201 - Created",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Location header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Location\");\r",
+									"\r",
+									"    const data = pm.response.json();\r",
+									"\r",
+									"    pm.collectionVariables.set(\"language_resource_group_id\", data.id);\r",
+									"\r",
+									"    const locationUrl = `${pm.environment.get(\"base_url\")}/${pm.collectionVariables.get(\"application_route\")}/${pm.collectionVariables.get(\"application_id\")}/${pm.collectionVariables.get(\"language_resource_group_route\")}/${data.id}`;\r",
+									"    pm.expect(pm.response.headers.get(\"Location\")).to.eq(locationUrl);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{language_resource_group_name}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_resource_group_route}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_resource_group_route}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create - 422 - Name is undefined",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(data.traceId).is.not.oneOf([null, undefined])\r",
+									"    pm.expect(data.errors).is.not.oneOf([null, undefined])\r",
+									"\r",
+									"    pm.expect(data.type).to.eql(pm.collectionVariables.get(\"general_422_type\"));\r",
+									"    pm.expect(data.title).to.eql(pm.collectionVariables.get(\"general_422_title\"));\r",
+									"    pm.expect(data.detail).to.eql(pm.collectionVariables.get(\"general_422_detail\"));\r",
+									"    pm.expect(data.status).to.eql(422);\r",
+									"\r",
+									"    pm.expect(data.instance).to.eql(`/api/${pm.collectionVariables.get(\"application_route\")}/${pm.collectionVariables.get(\"application_id\")}/${pm.collectionVariables.get(\"language_resource_group_route\")}`);\r",
+									"    \r",
+									"    pm.expect(data.errors.Name).length(1);\r",
+									"    const emptyErrorMessage = pm.collectionVariables.get(\"general_422_error_empty\")\r",
+									"                                                    .replace(\"<propertyName>\", \"Name\");\r",
+									"    pm.expect(data.errors.Name[0]).to.eql(emptyErrorMessage);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_resource_group_route}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_resource_group_route}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create - 422 - Name is null",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(data.traceId).is.not.oneOf([null, undefined])\r",
+									"    pm.expect(data.errors).is.not.oneOf([null, undefined])\r",
+									"\r",
+									"    pm.expect(data.type).to.eql(pm.collectionVariables.get(\"general_422_type\"));\r",
+									"    pm.expect(data.title).to.eql(pm.collectionVariables.get(\"general_422_title\"));\r",
+									"    pm.expect(data.detail).to.eql(pm.collectionVariables.get(\"general_422_detail\"));\r",
+									"    pm.expect(data.status).to.eql(422);\r",
+									"\r",
+									"    pm.expect(data.instance).to.eql(`/api/${pm.collectionVariables.get(\"application_route\")}/${pm.collectionVariables.get(\"application_id\")}/${pm.collectionVariables.get(\"language_resource_group_route\")}`);\r",
+									"    \r",
+									"    pm.expect(data.errors.Name).length(1);\r",
+									"    const emptyErrorMessage = pm.collectionVariables.get(\"general_422_error_empty\")\r",
+									"                                                    .replace(\"<propertyName>\", \"Name\");\r",
+									"    pm.expect(data.errors.Name[0]).to.eql(emptyErrorMessage);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_resource_group_route}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_resource_group_route}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create - 422 - Name is empty",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(data.traceId).is.not.oneOf([null, undefined])\r",
+									"    pm.expect(data.errors).is.not.oneOf([null, undefined])\r",
+									"\r",
+									"    pm.expect(data.type).to.eql(pm.collectionVariables.get(\"general_422_type\"));\r",
+									"    pm.expect(data.title).to.eql(pm.collectionVariables.get(\"general_422_title\"));\r",
+									"    pm.expect(data.detail).to.eql(pm.collectionVariables.get(\"general_422_detail\"));\r",
+									"    pm.expect(data.status).to.eql(422);\r",
+									"\r",
+									"    pm.expect(data.instance).to.eql(`/api/${pm.collectionVariables.get(\"application_route\")}/${pm.collectionVariables.get(\"application_id\")}/${pm.collectionVariables.get(\"language_resource_group_route\")}`);\r",
+									"    \r",
+									"    pm.expect(data.errors.Name).length(1);\r",
+									"    const emptyErrorMessage = pm.collectionVariables.get(\"general_422_error_empty\")\r",
+									"                                                    .replace(\"<propertyName>\", \"Name\");\r",
+									"    pm.expect(data.errors.Name[0]).to.eql(emptyErrorMessage);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_resource_group_route}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_resource_group_route}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create - 422 - Name is too long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"    pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(data.traceId).is.not.oneOf([null, undefined])\r",
+									"    pm.expect(data.errors).is.not.oneOf([null, undefined])\r",
+									"\r",
+									"    pm.expect(data.type).to.eql(pm.collectionVariables.get(\"general_422_type\"));\r",
+									"    pm.expect(data.title).to.eql(pm.collectionVariables.get(\"general_422_title\"));\r",
+									"    pm.expect(data.status).to.eql(422);\r",
+									"    pm.expect(data.detail).to.eql(pm.collectionVariables.get(\"general_422_detail\"));\r",
+									"\r",
+									"    pm.expect(data.instance).to.eql(`/api/${pm.collectionVariables.get(\"application_route\")}/${pm.collectionVariables.get(\"application_id\")}/${pm.collectionVariables.get(\"language_resource_group_route\")}`);\r",
+									"\r",
+									"    pm.expect(data.errors.Name).length(1);\r",
+									"    const emptyErrorMessage = pm.collectionVariables.get(\"general_422_error_max_length\")\r",
+									"                                                    .replace(\"<propertyName>\", \"Name\")\r",
+									"                                                    .replace(\"<max>\", pm.collectionVariables.get(\"language_name_max\"))\r",
+									"                                                    .replace(\"<length>\", 101);\r",
+									"    pm.expect(data.errors.Name[0]).to.eql(emptyErrorMessage);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"levvgepyogsdazlnzbtrzdknuqzptbmkbpdxiofzqvqoyacneaapwqowbdrmmpilwfweikuhrfuvihjoxxquzduvyqfntlfxayhro\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_resource_group_route}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_resource_group_route}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All - 200 - Ok",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_resource_group_route}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_resource_group_route}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get - 200 - Ok",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"\r",
+									"    pm.expect(data.id).to.eql(pm.variables.get(\"language_resource_group_id\"));\r",
+									"    pm.expect(data.name).to.eql(pm.variables.get(\"language_resource_group_name\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_resource_group_route}}/{{language_resource_group_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_resource_group_route}}",
+								"{{language_resource_group_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get - 404 - Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(data.traceId).is.not.oneOf([null, undefined])\r",
+									"\r",
+									"    pm.expect(data.type).to.eql(pm.collectionVariables.get(\"general_404_type\"));\r",
+									"    pm.expect(data.title).to.eql(pm.collectionVariables.get(\"general_404_title\"));\r",
+									"    pm.expect(data.status).to.eql(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_resource_group_route}}/0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_resource_group_route}}",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete - 204 - No Content",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"There is no response body\", function () {\r",
+									"    var response = (_.isEmpty(responseBody));\r",
+									"    pm.expect(response).to.be.true\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_resource_group_route}}/{{language_resource_group_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_resource_group_route}}",
+								"{{language_resource_group_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete - 404 - Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has body\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response has valid body\", function () {\r",
+									"    const data = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(data.traceId).is.not.oneOf([null, undefined])\r",
+									"\r",
+									"    pm.expect(data.type).to.eql(pm.collectionVariables.get(\"general_404_type\"));\r",
+									"    pm.expect(data.title).to.eql(pm.collectionVariables.get(\"general_404_title\"));\r",
+									"    pm.expect(data.status).to.eql(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/{{application_route}}/{{application_id}}/{{language_resource_group_route}}/0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{application_route}}",
+								"{{application_id}}",
+								"{{language_resource_group_route}}",
+								"0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -3544,6 +4110,18 @@
 		{
 			"key": "application_name_max",
 			"value": "100"
+		},
+		{
+			"key": "language_resource_group_route",
+			"value": "Language-resource-groups"
+		},
+		{
+			"key": "language_resource_group_name",
+			"value": "TestLanguageResourceGroupName"
+		},
+		{
+			"key": "language_resource_group_id",
+			"value": "0"
 		}
 	]
 }
