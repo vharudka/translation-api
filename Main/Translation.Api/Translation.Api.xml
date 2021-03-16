@@ -4,14 +4,14 @@
         <name>Translation.Api</name>
     </assembly>
     <members>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetOptions">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationController.GetOptions">
             <summary>
             Retrieves allow header
             </summary>
             <returns>An empty response with allow header for application</returns>
             <response code="200">Returns allow header for application</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.CreateApplicationAsync(Harudka.Translation.Api.Dto.ApplicationForCreationDto)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationController.CreateAsync(Harudka.Translation.Api.Dto.ApplicationForCreationDto)">
             <summary>
             Creates a new application
             </summary>
@@ -21,7 +21,7 @@
             <response code="422">If there was a validation error</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.UpdateApplicationAsync(System.Guid,Harudka.Translation.Api.Dto.ApplicationForUpdatingDto)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationController.UpdateAsync(System.Guid,Harudka.Translation.Api.Dto.ApplicationForUpdatingDto)">
             <summary>
             Updates an existing application
             </summary>
@@ -33,7 +33,7 @@
             <response code="404">If an application does not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetApplicationAsync(System.Guid)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationController.GetAsync(System.Guid)">
             <summary>
             Retrieves an application by id
             </summary>
@@ -43,7 +43,7 @@
             <response code="404">If an application does not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetAllApplicationsAsync">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationController.GetAllAsync">
             <summary>
             Retrieves applications
             </summary>
@@ -51,7 +51,7 @@
             <response code="200">If an applications were successfully returned</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.DeleteApplicationAsync(System.Guid)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationController.DeleteAsync(System.Guid)">
             <summary>
             Deletes an application by id
             </summary>
@@ -61,7 +61,7 @@
             <response code="404">If an application does not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.CreateApplicationLanguageAsync(System.String,Harudka.Translation.Api.Dto.ApplicationLanguageForCreationDto)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationLanguageController.CreateAsync(System.String,Harudka.Translation.Api.Dto.ApplicationLanguageForCreationDto)">
             <summary>
             Creates a new application language
             </summary>
@@ -72,7 +72,7 @@
             <response code="422">If there was a validation error</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetApplicationLanguageAsync(System.Guid,System.Int16)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationLanguageController.GetAsync(System.Guid,System.Int16)">
             <summary>
             Retrieves an application language by applicationId and languageId
             </summary>
@@ -83,7 +83,7 @@
             <response code="404">If an application language does not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetAllApplicationLanguagesAsync(System.Guid)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationLanguageController.GetAllAsync(System.Guid)">
             <summary>
             Retrieves application languages
             </summary>
@@ -92,7 +92,7 @@
             <response code="200">If an application languages were successfully returned</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.DeleteApplicationLanguageAsync(System.Guid,System.Int16)">
+        <member name="M:Harudka.Translation.Api.Controllers.ApplicationLanguageController.DeleteAsync(System.Guid,System.Int16)">
             <summary>
             Deletes an application language by applicationId and languageId
             </summary>
@@ -103,56 +103,14 @@
             <response code="404">If an application language does not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.CreateApplicationLanguageResourceGroupAsync(System.String,Harudka.Translation.Api.Dto.LanguageResourceGroupForCreationDto)">
-            <summary>
-            Creates a new application language resource group
-            </summary>
-            <param name="applicationId">application id</param>
-            <param name="languageResourceGroupForCreationDto">Request model</param>
-            <returns>A response with a created application language resource group</returns>
-            <response code="201">If an application language resource group was successfully created</response>
-            <response code="422">If there was a validation error</response>
-            <response code="500">If there was an internal server error</response>
-        </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetApplicationLanguageResourceGroupAsync(System.Guid,System.Int32)">
-            <summary>
-            Retrieves an application language resource group by applicationId and language resource group id
-            </summary>
-            <param name="applicationId">application id</param>
-            <param name="languageResourceGroupId">language resource group id</param>
-            <returns>A response with an application language resource group</returns>
-            <response code="200">If an application language resource group was successfully found</response>
-            <response code="404">If an application language resource group does not exists</response>
-            <response code="500">If there was an internal server error</response>
-        </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.GetAllApplicationLanguageResourceGroupsAsync(System.Guid)">
-            <summary>
-            Retrieves application language resource groups
-            </summary>
-            <param name="applicationId">application id</param>
-            <returns>A response with a list of application language resource groups</returns>
-            <response code="200">If an application language resource groups were successfully returned</response>
-            <response code="500">If there was an internal server error</response>
-        </member>
-        <member name="M:Harudka.Translation.Api.Controllers.ApplicationsController.DeleteApplicationLanguageResourceGroupAsync(System.Guid,System.Int32)">
-            <summary>
-            Deletes an application language resource group by applicationId and language resource group id
-            </summary>
-            <param name="applicationId">application id</param>
-            <param name="languageResourceGroupId">language resource group id</param>
-            <returns>A response with no content</returns>
-            <response code="204">If an application language resource group was successfully deleted</response>
-            <response code="404">If an application language resource group does not exists</response>
-            <response code="500">If there was an internal server error</response>
-        </member>
-        <member name="M:Harudka.Translation.Api.Controllers.LanguagesController.GetOptions">
+        <member name="M:Harudka.Translation.Api.Controllers.LanguageController.GetOptions">
             <summary>
             Retrieves allow header
             </summary>
             <returns>An empty response with allow header for language</returns>
             <response code="200">Returns allow header for language</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.LanguagesController.CreateAsync(Harudka.Translation.Api.Dto.LanguageForCreationDto)">
+        <member name="M:Harudka.Translation.Api.Controllers.LanguageController.CreateAsync(Harudka.Translation.Api.Dto.LanguageForCreationDto)">
             <summary>
             Creates a new language
             </summary>
@@ -162,7 +120,7 @@
             <response code="422">If there was a validation error</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.LanguagesController.UpdateAsync(System.Int16,Harudka.Translation.Api.Dto.LanguageForUpdatingDto)">
+        <member name="M:Harudka.Translation.Api.Controllers.LanguageController.UpdateAsync(System.Int16,Harudka.Translation.Api.Dto.LanguageForUpdatingDto)">
             <summary>
             Updates an existing language
             </summary>
@@ -174,7 +132,7 @@
             <response code="404">If a language does not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.LanguagesController.GetAsync(System.Int16)">
+        <member name="M:Harudka.Translation.Api.Controllers.LanguageController.GetAsync(System.Int16)">
             <summary>
             Retrieves a language by id
             </summary>
@@ -184,7 +142,7 @@
             <response code="404">If a language does not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.LanguagesController.GetAllAsync">
+        <member name="M:Harudka.Translation.Api.Controllers.LanguageController.GetAllAsync">
             <summary>
             Retrieves languages
             </summary>
@@ -192,7 +150,7 @@
             <response code="200">If a languages were successfully returned</response>
             <response code="500">If there was an internal server error</response>
         </member>
-        <member name="M:Harudka.Translation.Api.Controllers.LanguagesController.DeleteAsync(System.Int16)">
+        <member name="M:Harudka.Translation.Api.Controllers.LanguageController.DeleteAsync(System.Int16)">
             <summary>
             Deletes a language by id
             </summary>
@@ -200,6 +158,48 @@
             <returns>A response with no content</returns>
             <response code="204">If a language was successfully deleted</response>
             <response code="404">If a language does not exists</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.LanguageResourceGroupController.CreateAsync(System.String,Harudka.Translation.Api.Dto.LanguageResourceGroupForCreationDto)">
+            <summary>
+            Creates a new application language resource group
+            </summary>
+            <param name="applicationId">application id</param>
+            <param name="languageResourceGroupForCreationDto">Request model</param>
+            <returns>A response with a created application language resource group</returns>
+            <response code="201">If an application language resource group was successfully created</response>
+            <response code="422">If there was a validation error</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.LanguageResourceGroupController.GetAsync(System.Guid,System.Int32)">
+            <summary>
+            Retrieves an application language resource group by applicationId and language resource group id
+            </summary>
+            <param name="applicationId">application id</param>
+            <param name="languageResourceGroupId">language resource group id</param>
+            <returns>A response with an application language resource group</returns>
+            <response code="200">If an application language resource group was successfully found</response>
+            <response code="404">If an application language resource group does not exists</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.LanguageResourceGroupController.GetAllAsync(System.Guid)">
+            <summary>
+            Retrieves application language resource groups
+            </summary>
+            <param name="applicationId">application id</param>
+            <returns>A response with a list of application language resource groups</returns>
+            <response code="200">If an application language resource groups were successfully returned</response>
+            <response code="500">If there was an internal server error</response>
+        </member>
+        <member name="M:Harudka.Translation.Api.Controllers.LanguageResourceGroupController.DeleteAsync(System.Guid,System.Int32)">
+            <summary>
+            Deletes an application language resource group by applicationId and language resource group id
+            </summary>
+            <param name="applicationId">application id</param>
+            <param name="languageResourceGroupId">language resource group id</param>
+            <returns>A response with no content</returns>
+            <response code="204">If an application language resource group was successfully deleted</response>
+            <response code="404">If an application language resource group does not exists</response>
             <response code="500">If there was an internal server error</response>
         </member>
     </members>

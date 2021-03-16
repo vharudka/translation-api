@@ -17,6 +17,12 @@ namespace Harudka.Translation.Api.Tests.Validators
         protected LanguageResourceGroupForCreationDtoBuilder _builder;
         protected LanguageResourceGroupForCreationDtoValidator _validator;
 
+        public LanguageResourceGroupForCreationDtoValidatorTests()
+        {
+            _builder = new LanguageResourceGroupForCreationDtoBuilder();
+            _validator = new LanguageResourceGroupForCreationDtoValidator();
+        }
+
         [Fact]
         protected void NameIsValid()
         {

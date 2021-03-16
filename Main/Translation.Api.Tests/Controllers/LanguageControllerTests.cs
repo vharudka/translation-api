@@ -17,15 +17,15 @@ using Xunit;
 
 namespace Harudka.Translation.Api.Tests.Controllers
 {
-    public class LanguagesControllerTests
+    public class LanguageControllerTests
     {
         private readonly Mock<ILanguageRepository> _languageRepositoryMock;
         private readonly LanguageBuilder _languageBuilder;
         private readonly LanguageForCreationDtoBuilder _languageForCreationDtoBuilder;
         private readonly LanguageForUpdatingDtoBuilder _languageForUpdatingDtoBuilder;
-        private readonly LanguagesController _controller;
+        private readonly LanguageController _controller;
 
-        public LanguagesControllerTests()
+        public LanguageControllerTests()
         {
             _languageRepositoryMock = new Mock<ILanguageRepository>();
             _languageBuilder = new LanguageBuilder();
@@ -41,7 +41,7 @@ namespace Harudka.Translation.Api.Tests.Controllers
             var mapper = config.CreateMapper();
 
             var httpContext = new DefaultHttpContext();
-            _controller = new LanguagesController(_languageRepositoryMock.Object, mapper)
+            _controller = new LanguageController(_languageRepositoryMock.Object, mapper)
             {
                 ControllerContext = new ControllerContext()
                 {

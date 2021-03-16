@@ -14,13 +14,13 @@ using System.Threading.Tasks;
 namespace Harudka.Translation.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
-    public class LanguagesController : ControllerBase
+    [Route("api/languages")]
+    public class LanguageController : ControllerBase
     {
         private readonly ILanguageRepository _languageRepository;
         private readonly IMapper _mapper;
 
-        public LanguagesController(ILanguageRepository languageRepository, IMapper mapper)
+        public LanguageController(ILanguageRepository languageRepository, IMapper mapper)
         {
             _languageRepository = languageRepository;
             _mapper = mapper;
