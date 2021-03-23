@@ -48,7 +48,10 @@ namespace Harudka.Translation.Api
             services.AddScoped<IApplicationLanguageRepository, ApplicationLanguageRepository>();
             services.AddScoped<ILanguageResourceGroupRepository, LanguageResourceGroupRepository>();
 
-            services.AddControllers()
+            services.AddControllers(setupAction =>
+                    {
+                        setupAction.ReturnHttpNotAcceptable = true;
+                    })
                     .AddFluentValidation(options =>
                     {
                         options.RegisterValidatorsFromAssemblyContaining<Startup>();
